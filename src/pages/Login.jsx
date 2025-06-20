@@ -65,7 +65,7 @@ function LoginPage() {
     return (      
       <header className="header">
         <button className="header-button" onClick={() => navigate("/")}> Página Inicial</button>
-        <button className="header-button2" onClick={() => navigate("/Cadastro")}>Cadastre-se</button>
+        <button className="header-button2" onClick={() => navigate("/Cadastro")}>Cadastre-se2</button>
 
       <div className="containerlogin">
         <img src="blob.svg" className="blob" alt="Background Blob" />
