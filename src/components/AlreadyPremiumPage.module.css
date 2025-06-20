@@ -1,0 +1,311 @@
+/* src/components/AlreadyPremiumPage.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/*
+  Nota: Se estas variáveis são para uso global, considere movê-las
+  para um arquivo CSS global (ex: src/index.css) e importá-lo
+  no seu arquivo de entrada principal (main.jsx ou App.jsx).
+  Se forem apenas para este componente, elas funcionarão aqui.
+*/
+:root {
+  --premium-gold: #FFD700;
+  --premium-dark-gold: #FFA500;
+  --background-gradient-start: #1a1a2e;
+  --background-gradient-end: #16213e;
+  --card-background: rgba(255, 255, 255, 0.05);
+  --text-color: #e0e0e0;
+  --text-color-light: #ffffff;
+  --button-bg: linear-gradient(135deg, var(--premium-gold), var(--premium-dark-gold));
+  --button-text-color: #2c2c2c;
+  --shadow-color: rgba(255, 215, 0, 0.3);
+}
+
+.premiumContainer { /* Alterado para camelCase para facilitar o uso no JS, mas o CSS original também funciona com styles['premium-container'] */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--background-gradient-start), var(--background-gradient-end));
+  color: var(--text-color);
+  overflow: hidden;
+  position: relative;
+}
+
+.premiumCard {
+  background: var(--card-background);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 25px;
+  padding: 40px 50px;
+  text-align: center;
+  max-width: 550px;
+  width: 90%;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  animation: fadeInCard 1s ease-out forwards;
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.shineOverlay {
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 215, 0, 0.15),
+    transparent
+  );
+  transform: skewX(-25deg);
+  animation: shine 5s infinite 1s;
+  pointer-events: none;
+}
+
+@keyframes shine {
+  0% {
+    left: -150%;
+  }
+  50% {
+    left: 150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+.premiumIcon {
+  margin-bottom: 20px;
+  filter: drop-shadow(0px 5px 15px var(--shadow-color));
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+/*
+  As regras abaixo que tentavam estilizar o SVG internamente
+  via classe .premium-icon (ex: .premium-icon svg path)
+  foram removidas. A estilização do SVG (cores, gradientes) agora
+  é feita principalmente via atributos diretos no JSX do SVG
+  e pela classe aplicada ao elemento <svg> principal (styles.premiumIcon).
+  O gradiente goldGradient é definido e usado diretamente no SVG.
+*/
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.premiumTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-color-light);
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, var(--premium-gold), var(--premium-dark-gold));
+  -webkit-background-clip: text;
+  background-clip: text; /* Adicionado para compatibilidade */
+  -webkit-text-fill-color: transparent;
+  animation: textPopIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+@keyframes textPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.premiumMessage { /* Adicionada esta classe que faltava no JSX original */
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.premiumSubMessage {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: #b0b0b0;
+}
+
+.premiumButton {
+  display: inline-block;
+  background: var(--button-bg);
+  color: var(--button-text-color);
+  padding: 14px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.premiumButton:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: all 0.5s;
+}
+
+.premiumButton:hover:before {
+  left: 100%;
+}
+
+.premiumButton:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px var(--shadow-color), 0 0 20px var(--premium-gold);
+}
+
+.premiumButton:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.backgroundShapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.shape {
+  position: absolute;
+  list-style: none;
+  display: block;
+  border-radius: 15%;
+  background-color: rgba(255, 215, 0, 0.08);
+  animation: animateShapes 20s linear infinite;
+  bottom: -150px;
+}
+
+.shape1 { /* Estas classes serão combinadas com 'shape' no JSX */
+  left: 10%;
+  width: 80px;
+  height: 80px;
+  animation-delay: 0s;
+  animation-duration: 15s;
+}
+
+.shape2 {
+  left: 25%;
+  width: 120px;
+  height: 120px;
+  animation-delay: 2s;
+  animation-duration: 18s;
+}
+
+.shape3 {
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  animation-delay: 4s;
+  animation-duration: 12s;
+}
+
+.shape4 {
+  left: 75%;
+  width: 100px;
+  height: 100px;
+  animation-delay: 1s;
+  animation-duration: 20s;
+}
+.shape5 {
+  left: 90%;
+  width: 60px;
+  height: 60px;
+  animation-delay: 3s;
+  animation-duration: 16s;
+}
+
+@keyframes animateShapes {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 15%;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .premiumCard {
+    padding: 30px 30px;
+    max-width: 90%;
+  }
+  .premiumTitle {
+    font-size: 2rem;
+  }
+  .premiumMessage {
+    font-size: 1rem;
+  }
+  .premiumSubMessage {
+    font-size: 0.9rem;
+  }
+  .premiumButton {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+  .premiumIcon { /* Estilizando o ícone responsivamente se necessário */
+    width: 60px; /* O tamanho já é definido no SVG, mas pode ser ajustado aqui se a classe for aplicada */
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .premiumTitle {
+    font-size: 1.7rem;
+  }
+  .premiumMessage {
+    font-size: 0.9rem;
+  }
+   .premiumSubMessage {
+    font-size: 0.8rem;
+  }
+  .premiumButton {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+}

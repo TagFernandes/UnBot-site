@@ -1,0 +1,37 @@
+/* src/components/PixButton.module.css */
+
+.pixButton {
+    /* Cores e Layout */
+    background-color: #00bfa5; /* Verde característico do Pix */
+    color: white;
+    border: none;
+    border-radius: 50px; /* Bordas arredondadas para um visual amigável */
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    
+    /* Ícone e Texto alinhados */
+    display: inline-flex;
+    align-items: center;
+    gap: 12px; /* Espaço entre o ícone e o texto */
+    
+    cursor: pointer;
+    
+    /* Efeitos de Transição */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 191, 165, 0.3);
+  }
+  
+  /* Efeito ao passar o mouse */
+  .pixButton:hover {
+    transform: translateY(-3px); /* Eleva o botão */
+    box-shadow: 0 6px 20px rgba(0, 191, 165, 0.4);
+    background-color: #00ab91;
+  }
+  
+  /* Efeito ao clicar */
+  .pixButton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 191, 165, 0.3);
+  }

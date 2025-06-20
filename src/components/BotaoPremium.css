@@ -1,0 +1,53 @@
+.premium-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .premium-button {
+    background-color: #a0f; /* Roxo médio */
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600; /* Semibold */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  
+  .tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px); /* Espaçamento acima do botão */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #555; /* Cinza escuro para contraste */
+    color: #eee;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 2; /* Garante que o tooltip esteja acima de outros elementos */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s; /* Animação de fade-in */
+  }
+  
+  .premium-container:hover .tooltip {
+    opacity: 0.95;
+    visibility: visible;
+    transition-delay: 0s; /* Remove o delay no hover */
+  }
+  
+  /* Pequena seta para o tooltip */
+  .tooltip::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }

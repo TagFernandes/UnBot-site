@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+
+.Page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    max-width: 400px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cupom-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    max-width: 300px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cupom-container h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.card-preview {
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.credit-card-image {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+}
+
+.payment-form {
+    width: 100%;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    font-size: 14px;
+}
+
+.form-group {
+    display: flex;
+    gap: 10px;
+}
+
+.small-input {
+    flex: 1;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #b71c1c;
+}
+
+
+
+.btn-aplicarCupom {
+    width: 50%;
+    margin-top: 10px;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: var(--cor-primaria);
+    color: var(--cor-secundaria);
+    cursor: pointer;
+    box-shadow: 0px 5px 50px rgba(42, 92, 184, 0.3);
+
+    transition-duration: 0.25s;
+}
+
+.btn-aplicarCupom:hover {
+    transition-duration: 0.15s;
+    background: purple;
+    width: 60%;
+    border-radius: 20px;
+}
+
+
+.btn-quantity {
+    width: 25px; 
+    height: 25px; 
+    font-Size: 18px; 
+    border-radius: 20px ;
+    border: 1px solid #4b4b4b;
+    color: black;
+    background-color: rgb(225, 225, 225);
+    transition-duration: 0.2s;
+
+}
+
+.btn-quantity:hover {
+    transition-duration: 0.15s;
+    background-color: rgb(185, 185, 185);
+    color: black;
+    cursor: pointer;
+}
+
+.btn-quantity:active{
+    transition-duration: 0.1s;
+    scale: 1.1;
+}
+
+
+.btn-pay{
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: var(--cor-primaria);
+    color: var(--cor-secundaria);
+    cursor: pointer;
+    transition-duration: 0.15s;
+}
+
+.btn-pay:hover{
+    transition-duration: 0.15s;
+    background-color: blue;
+    border-radius: 25px;
+    width: 100%;
+}
+
+.btn-pay.disabled {
+    background-color: gray; /* Cor cinza para indicar que está desabilitado */
+    cursor: not-allowed; /* Cursor de "não permitido" */
+    opacity: 0.7; /* Suavizar a aparência */
+    border-radius: 25px;
+    width: 100%;
+  }
+
+
+
+  .TotalCash {
+    font-family: 'Quicksand', Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 900;
+  }
+
+
+  .btn-home {
+    max-width: 15%;
+    transition: 0.2s;
+    width: 200px;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    background-color: purple;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.btn-home:hover {
+    transition: 0.5s;
+    scale: 1.1;
+    background-color: #1565c0;
+}
+
+
+/* ==== LAYOUT DA PÁGINA E HISTÓRICO ==== */
+
+/* ==== SEÇÃO DE HISTÓRICO ==== */
+
+.history-section {
+    width: 100%; /* Ocupa toda a largura */
+    max-width: 800px; /* Mesma largura máxima do content-container */
+    margin-top: 40px; /* Espaço entre a seção de pagamento e o histórico */
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+  
+  .history-title {
+    text-align: center;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+  }
+  
+  .pix-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 400px; /* Altura máxima antes de mostrar a barra de rolagem */
+    overflow-y: auto; /* Adiciona rolagem se a lista for muito grande */
+    padding-right: 10px; /* Espaço para a barra de rolagem não sobrepor o conteúdo */
+  }
+  
+  .pix-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left-width: 5px;
+  }
+  
+  .pix-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Cores baseadas no status */
+  .pix-item.status-pendente {
+    border-left-color: #ffc107; /* Amarelo */
+  }
+  
+  .pix-item.status-cancelado {
+    border-left-color: #dc3545; /* Vermelho */
+    opacity: 0.8;
+  }
+  
+  .pix-item.status-pago {
+    border-left-color: #28a745; /* Verde */
+  }
+  
+  .pix-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pix-valor {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .pix-id {
+    font-size: 0.85em;
+    color: #666;
+  }
+  
+  .pix-status-badge {
+    font-weight: bold;
+    font-size: 0.8em;
+    padding: 4px 8px;
+    border-radius: 10px;
+    color: white;
+    text-transform: uppercase;
+  }
+  
+  .status-pendente .pix-status-badge {
+    background-color: #ffc107;
+    color: #333;
+  }
+  
+  .status-cancelado .pix-status-badge {
+    background-color: #dc3545;
+  }
+  
+  .status-pago .pix-status-badge {
+    background-color: #28a745;
+  }
+  
+  .history-error {
+    color: #dc3545;
+    font-weight: bold;
+    text-align: center;
+  }
+
+
+
+
+@media (max-width: 768px) {
+    .content-container {
+      display: flex; /* Certifique-se de que o flex está ativo */
+      flex-direction: column; /* Organiza os itens em coluna */
+      align-items: center; /* Centraliza no eixo horizontal */
+      justify-content: center; /* Centraliza no eixo vertical */
+      width: 100%; /* Garante que ocupe toda a largura disponível */
+      margin: auto; /* Certifica a centralização no eixo horizontal */
+      padding: 10px; /* Opcional: para evitar que os elementos toquem as bordas */
+      gap: 20px; /* Espaçamento entre os itens */
+    }
+  
+    .cupom-container {
+      order: -1; /* Move o cupom para o topo */
+      width: 100%; /* Garante que ocupe a largura total disponível */
+    }
+  
+    .card-container {
+      width: 100%; /* Garante que também ocupe a largura total */
+    }
+  }

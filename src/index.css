@@ -1,0 +1,23 @@
+:root {
+  /* Variáveis de cores para facilitar a manutenção */
+  --cor-fundo: white;        /* Fundo geral da tela */  /*#f3f7fb*/
+  --cor-primaria: #2a5cb8;      /* Azul principal para títulos e botões */
+  --cor-secundaria: #fff;       /* Branco */
+  --cor-cinza: #f1f1f1;         /* Cinza claro para elementos de fundo */
+  --cor-cinza-escuro: #444;     /* Cinza mais escuro para textos */
+  --cor-borda: #ccc;            /* Cinza para bordas e divisões */
+  --cor-texto: #333;            /* Cor de texto padrão */
+  --cor-placeholder: #999;      /* Cor de placeholder */
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+body * {
+  box-sizing: border-box;
+}

@@ -1,0 +1,219 @@
+import React, { useState, useEffect, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
+import api from '../api/api';
+import '../styles/CardPayment.css';
+
+function App() {
+  const location = useLocation();
+
+  // Inicializar quantidade da URL
+  const initialQuantity = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    return Number(params.get('quantity')) || 1;
+  }, [location.search]);
+
+  const [quantity, setQuantity] = useState(initialQuantity);
+  const [coupon, setCoupon] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState('');
+  const [couponMessage, setCouponMessage] = useState('');
+  const [isCouponValid, setIsCouponValid] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [cpf, setCpf] = useState('');
+  const [cardHolder, setCardHolder] = useState('');
+
+  // Atualizar preço total quando quantity ou appliedCoupon mudarem
+  useEffect(() => {
+    const fetchTotalPrice = async () => {
+      try {
+        const response = await api.post('/getPrice', {
+          cupom: appliedCoupon,
+          quantidade: quantity,
+        });
+        setTotalPrice(response.data.valor);
+      } catch (error) {
+        console.error('Erro ao calcular o preço total:', error);
+        setTotalPrice(0);
+      }
+    };
+
+    fetchTotalPrice();
+  }, [quantity, appliedCoupon]);
+
+  const handleApplyCoupon = async () => {
+    try {
+      const response = await api.post('/verifyCupom', { cupom: coupon });
+      if (response.status === 200) {
+        setIsCouponValid(true);
+        setCouponMessage(`Cupom aplicado: ${response.data.desconto}% OFF`);
+        setAppliedCoupon(coupon);
+      }
+    } catch (error) {
+      console.error('Erro ao validar o cupom:', error);
+      setIsCouponValid(false);
+      setCoupon('');
+      setCouponMessage('Cupom esgotado ou inexistente');
+      setTimeout(() => setCouponMessage(''), 7000);
+    }
+  };
+
+  const handleClearCoupon = () => {
+    setCoupon('');
+    setCouponMessage('');
+    setIsCouponValid(null);
+    setAppliedCoupon('');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const card = PagSeguro.encryptCard({
+        publicKey: 'YOUR_PUBLIC_KEY_HERE',
+        holder: cardHolder,
+        number: document.querySelector('#cardNumber').value,
+        expMonth: document.querySelector('#cardMonth').value,
+        expYear: document.querySelector('#cardYear').value,
+        securityCode: document.querySelector('#cardCvv').value,
+      });
+
+      const encryptedCard = card.encryptedCard;
+
+      await api.post('/CardPaymentController', {
+        encryptedCard,
+        coupon: appliedCoupon,
+        quantity,
+        totalPrice,
+        cpf,
+        cardHolder,
+      });
+
+      alert('Pagamento realizado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao enviar o pagamento:', error);
+      alert('Erro ao processar o pagamento. Tente novamente.');
+    }
+  };
+
+  return (
+    <div className="Page">
+      <h1 className="title">Pagamento</h1>
+      <div className="content-container">
+        <div className="card-container">
+          <div className="card-preview">
+            <div className="card-visa">
+              <span className="card-logo">VISA</span>
+              <div className="card-number">000 0000 0000 0000</div>
+              <div className="card-expiration">
+                <span>00 / 0000</span>
+                <span className="card-cvc">000</span>
+              </div>
+            </div>
+          </div>
+          <form id="formCard" onSubmit={handleSubmit} className="payment-form">
+            <input
+              type="text"
+              className="form-control"
+              name="cardHolder"
+              id="cardHolder"
+              value={cardHolder}
+              onChange={(e) => setCardHolder(e.target.value)}
+              placeholder="Nome do Titular do Cartão"
+            />
+            <input
+              type="text"
+              className="form-control"
+              name="cardNumber"
+              id="cardNumber"
+              maxLength="16"
+              placeholder="Número do Cartão"
+            />
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control small-input"
+                name="cardMonth"
+                id="cardMonth"
+                maxLength="2"
+                placeholder="MM"
+              />
+              <input
+                type="text"
+                className="form-control small-input"
+                name="cardYear"
+                id="cardYear"
+                maxLength="4"
+                placeholder="AAAA"
+              />
+              <input
+                type="text"
+                className="form-control small-input"
+                name="cardCvv"
+                id="cardCvv"
+                maxLength="3"
+                placeholder="CVC"
+              />
+            </div>
+            <input
+              type="text"
+              className="form-control"
+              name="cpf"
+              id="cpf"
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
+              maxLength="11"
+              placeholder="CPF (somente números)"
+            />
+            <button type="submit" className="btn btn-primary">Pagar</button>
+          </form>
+        </div>
+        <div className="cupom-container">
+          <h2>Cupons de desconto</h2>
+          <div style={{ position: 'relative' }}>
+            <input
+              type="text"
+              className="form-control"
+              name="coupon"
+              id="coupon"
+              value={coupon}
+              onChange={(e) => setCoupon(e.target.value)}
+              placeholder="Cupom de Desconto"
+            />
+            {coupon && (
+              <button
+                className="btn-clear-input"
+                onClick={handleClearCoupon}
+                style={{
+                  position: 'absolute',
+                  right: '10px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '16px',
+                  color: 'black',
+                }}
+              >
+                ×
+              </button>
+            )}
+          </div>
+          {isCouponValid !== true && (
+            <button className="btn btn-secondary" onClick={handleApplyCoupon}>
+              Aplicar
+            </button>
+          )}
+          {couponMessage && (
+            <p style={{ color: isCouponValid ? 'green' : 'red', marginTop: '10px' }}>
+              {couponMessage}
+            </p>
+          )}
+          <p>Quantidade: {quantity}</p>
+          <p>Valor total: R$ {totalPrice.toFixed(2)}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;

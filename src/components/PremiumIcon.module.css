@@ -1,0 +1,25 @@
+/* PremiumIcon.module.css */
+
+/* Importa a fonte Montserrat.
+   Se você já importa esta fonte globalmente no seu projeto (ex: no index.css),
+   você pode remover esta linha daqui para evitar importações duplicadas. */
+   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+   .premiumIcon {
+     display: inline-block; /* Permite padding e se comporta bem com texto ao redor */
+     padding: 8px 16px; /* Espaçamento interno */
+     font-family: 'Montserrat', sans-serif; /* Fonte elegante */
+     font-size: 14px; /* Tamanho da fonte */
+     font-weight: bold; /* Negrito */
+     color: #ffffff; /* Cor do texto: branco para bom contraste com roxo */
+     text-transform: uppercase; /* Texto em maiúsculas */
+     letter-spacing: 1.5px; /* Espaçamento entre as letras para um toque refinado */
+     background-image: linear-gradient(45deg, #8A2BE2, #9400D3, #6A0DAD, #8A2BE2); /* Gradiente roxo: BlueViolet, DarkViolet, Purple, BlueViolet */
+     /* Ajustei o gradiente para incluir mais um tom de roxo e repetir o inicial para um loop mais suave */
+     border-radius: 25px; /* Cantos bem arredondados para um visual moderno de "pílula" */
+     box-shadow: 0 4px 6px rgba(40, 0, 60, 0.25), /* Sombra externa principal com tom roxo escuro */
+                 0 1px 3px rgba(40, 0, 60, 0.15) inset; /* Sombra interna sutil para efeito de profundidade */
+     text-shadow: 1px 1px 2px rgba(30, 0, 50, 0.4); /* Sombra no texto com tom roxo escuro para legibilidade */
+     cursor: default; /* Cursor padrão, já que não há interação */
+     user-select: none; /* Impede que o texto do ícone seja selecionado, se desejado */
+   }

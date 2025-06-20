@@ -1,0 +1,247 @@
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    width: 80%;
+    margin:auto;
+  }
+  
+  .header-left h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #ecf0f1;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .icon {
+    font-size: 1.5rem;
+    color: #ecf0f1;
+  }
+  
+  .username {
+    font-size: 1rem;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  .logout-button {
+    padding: 5px 10px;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .logout-button:hover {
+    background-color: #c0392b;
+    scale: 1.1;
+    border-radius: 10px;
+  }
+  
+
+
+  .homeTextButton {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+
+
+    .ButtonShop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: purple;
+    color:rgb(214, 212, 212);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    max-width: 150px;
+    font-size: 25px;
+    transition: all 0.3s ease;
+    margin-right: 25px;
+  }
+
+  .ButtonShop:hover {
+    scale: 1.1;
+    max-width: 200px;
+    background-color: rgb(37, 0, 37);
+  }
+
+  .user-menu-container {
+    position: relative; /* Necessário para posicionar o dropdown em relação a este container */
+    display: inline-block; /* Ou flex, dependendo do layout desejado */
+  }
+  
+  .user-icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex; /* Para alinhar o ícone, se necessário */
+    align-items: center; /* Para alinhar o ícone, se necessário */
+    color: inherit; /* Herda a cor do texto, ajuste conforme necessário */
+  }
+  
+  .user-icon-button .icon {
+    font-size: 1.5rem; /* Ajuste o tamanho do ícone conforme necessário */
+    /* Adicione outras estilizações para o ícone do botão se precisar */
+  }
+  
+  .user-dropdown {
+    position: absolute;
+    top: 100%; /* Posiciona abaixo do botão do ícone */
+    right: 0; /* Alinha à direita do container pai */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Garante que fique sobre outros elementos */
+    min-width: 300px; /* Largura mínima para o dropdown */
+    padding: 8px 0; /* Espaçamento interno */
+  }
+  
+  .user-dropdown .dropdown-item {
+    padding: 8px 16px;
+    display: block; /* Faz com que cada item ocupe a largura total */
+    width: 100%;
+    text-align: left; /* Alinha o texto à esquerda */
+  }
+  
+  .user-dropdown .username-display {
+    font-weight: bold;
+    color: #333; /* Cor do nome do usuário */
+  }
+  
+  .user-dropdown .logout-button-dropdown {
+    background: none;
+    border: none;
+    color: #d9534f; /* Cor para o botão de sair, por exemplo */
+    cursor: pointer;
+    width: 100%; /* Ocupa toda a largura do item */
+    text-align: center; /* Alinha o texto à esquerda */
+  }
+  
+  .user-dropdown .logout-button-dropdown:hover {
+    background-color: #f5f5f5; /* Cor de fundo ao passar o mouse */
+  }
+
+
+
+  /* HeaderBar.css */
+
+/* ... seus estilos existentes ... */
+
+.referral-status-container {
+  margin-top: 10px; /* Espaço acima da seção de indicações */
+  padding-top: 10px; /* Espaçamento interno superior */
+  border-top: 1px solid #e0e0e0; /* Linha separadora sutil */
+}
+
+.referral-info p {
+  margin: 5px 0; /* Margem entre os parágrafos */
+  font-size: 0.9em; /* Tamanho de fonte ligeiramente menor */
+  color: #4A5568; /* Cor do texto (cinza escuro) - ajuste conforme seu tema */
+  line-height: 1.4;
+}
+
+.referral-info .referral-remaining {
+  font-weight: 600; /* Semi-bold para os números */
+  color: #2D3748; /* Cor mais escura para os números */
+}
+
+.referral-premium-status {
+  color: #38A169; /* Verde para status premium */
+  font-weight: 600;
+}
+
+.referral-no-goal {
+  font-style: italic;
+  color: #718096; /* Cinza mais claro para status não ativo */
+}
+
+.referral-progress-wrapper {
+  width: 100%;
+  background-color: #E2E8F0; /* Fundo da barra de progresso (cinza claro) */
+  border-radius: 6px; /* Bordas arredondadas */
+  margin-top: 8px; /* Espaço acima da barra de progresso */
+  height: 12px; /* Altura da barra de progresso */
+  overflow: hidden; /* Garante que a barra interna não ultrapasse as bordas arredondadas */
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075); /* Sombra interna sutil */
+}
+
+.referral-progress-bar {
+  height: 100%;
+  background-color: #4299E1; /* Cor da barra de progresso (azul) - ajuste conforme seu tema */
+  /* Exemplo de gradiente:
+  background-image: linear-gradient(to right, #63B3ED, #4299E1);
+  */
+  border-radius: 6px; /* Deve corresponder ao wrapper para um visual limpo */
+  transition: width 0.4s ease-in-out; /* Animação suave da largura */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em; /* Para texto dentro da barra, se houver */
+  color: white;
+}
+
+/* Opcional: Ajustar o padding do item de dropdown se necessário */
+.user-dropdown .dropdown-item.username-display {
+  /* Se o conteúdo ficar muito apertado, você pode precisar ajustar o padding */
+  padding-bottom: 15px;
+}
+
+.info-indicacoes {
+  background-color: #f8f9fa; /* Fundo cinza claro */
+  border-left: 5px solid #007bff; /* Borda esquerda azul vibrante */
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidade */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte moderna e limpa */
+  color: #343a40; /* Cor do texto principal (cinza escuro) */
+  font-size: 1.1em; /* Tamanho da fonte ligeiramente aumentado */
+  display: flex; /* Usado para alinhar o texto e o contador na mesma linha se necessário */
+  align-items: center; /* Alinha verticalmente os itens */
+}
+
+.info-indicacoes .referral-count {
+  background-color: #007bff; /* Fundo azul para o contador */
+  color: #ffffff; /* Texto branco para contraste */
+  font-weight: bold;
+  padding: 6px 12px; /* Espaçamento interno para dar forma de "pílula" */
+  border-radius: 16px; /* Bordas bem arredondadas */
+  margin-left: 10px; /* Espaço à esquerda do contador */
+  font-size: 1.2em; /* Contador um pouco maior para destaque */
+  min-width: 25px; /* Largura mínima para números pequenos */
+  text-align: center; /* Centraliza o número na pílula */
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+/* Efeito hover opcional para o contador */
+.info-indicacoes .referral-count:hover {
+  transform: scale(1.1); /* Aumenta levemente ao passar o mouse */
+  background-color: #0056b3; /* Azul um pouco mais escuro no hover */
+}
