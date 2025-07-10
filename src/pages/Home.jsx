@@ -220,7 +220,7 @@ function App() {
                         <strong>Disciplina:</strong> {selectedBot.codDisciplina}
                     </p>
                     <p style={{ color: "red", fontWeight: "bold" }}>
-                        <strong>Status:</strong> Credenciais inválidas, verifique sua senha do SIGAA e reinicie o bot
+                        <strong>Status:</strong> Verifique o funcionamento do bot e reinicie
                     </p>
                     </>
                 )}
@@ -232,10 +232,10 @@ function App() {
                         <strong>Disciplina:</strong> {selectedBot.codDisciplina}
                     </p>
                     <p>
-                        <strong>Professor:</strong> {selectedBot.professor}
+                        <strong>Professor:</strong> {selectedBot.professor != "" ? selectedBot.professor : "Qualquer"}
                     </p>
                     <p>
-                        <strong>Horário:</strong> {selectedBot.horario}
+                        <strong>Horário:</strong> {selectedBot.horario != "" ? selectedBot.horario : "Qualquer"}
                     </p>
                     <p
                         style={{
@@ -256,13 +256,10 @@ function App() {
                         <strong>Disciplina:</strong> {selectedBot.codDisciplina}
                     </p>
                     <p>
-                        <strong>Professor:</strong> {selectedBot.professor}
+                        <strong>Professor:</strong> {selectedBot.professor != "" ? selectedBot.professor : "Qualquer"}
                     </p>
                     <p>
-                        <strong>Horário:</strong> {selectedBot.horario}
-                    </p>
-                    <p style={{ color: "purple", fontWeight: "bold" }}>
-                        <strong>Status:</strong> Running
+                        <strong>Horário:</strong> {selectedBot.horario != "" ? selectedBot.horario : "Qualquer"}
                     </p>
                     </>
                 )}

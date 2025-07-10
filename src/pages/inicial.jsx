@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/inicial.css";
 import { useNavigate } from 'react-router-dom'; 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import api from "../api/api";
 
 function App() {
@@ -10,7 +10,12 @@ function App() {
   const [contentType, setContentType] = useState(null);
   const [index, setIndex] = useState(0);
 
-  const handleDownload = async () => {
+
+  const handleDownload = useCallback(() => {
+      navigate('/download');
+    }, [navigate]);
+
+  /*const handleDownload = async () => {
     try {
       const response = await api.get("/download", { responseType: "blob" });
       // Cria um URL para o blob recebido
@@ -29,7 +34,7 @@ function App() {
     } catch (error) {
       console.error("Erro ao realizar o download:", error);
     }
-  };
+  };*/
 
   const [isVisible, setIsVisible] = useState(false); // Controla visibilidade da página
   useEffect(() => {
