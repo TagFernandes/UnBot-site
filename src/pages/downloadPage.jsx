@@ -8,7 +8,11 @@ const DownloadPage = () => {
   const handleDownload = () => {
     // Redireciona para o link da Microsoft Store
     // Por enquanto, está redirecionando para o Google como solicitado
-    window.location.href = 'https://www.google.com';
+      window.open(
+    'https://apps.microsoft.com/store/detail/9N0NFT354L9G?cid=DevShareMCLPCS',
+    '_blank', 
+    'noopener,noreferrer'
+  );
   };
 
   return (
