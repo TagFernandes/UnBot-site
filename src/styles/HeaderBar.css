@@ -245,3 +245,57 @@
   transform: scale(1.1); /* Aumenta levemente ao passar o mouse */
   background-color: #0056b3; /* Azul um pouco mais escuro no hover */
 }
+
+
+
+/* =========================================== */
+/* === AJUSTES DA HEADERBAR PARA DISPOSITIVOS MÓVEIS === */
+/* =========================================== */
+
+@media (max-width: 768px) {
+
+  /* 1. FAZ A BARRA OCUPAR TODA A LARGURA E AJUSTA O FORMATO */
+  .header-bar {
+    width: 100%;
+    border-radius: 0; /* Remove as bordas arredondadas para um visual de tela cheia */
+    padding: 10px 15px; /* Ajusta o espaçamento interno */
+  }
+
+  /* 2. ESCONDE ITENS QUE SÃO REDUNDANTES OU OCUPAM MUITO ESPAÇO */
+  /* O nome de usuário e o botão de logout já estão no dropdown. */
+  .username,
+  .logout-button {
+    display: none;
+  }
+  
+  /* 3. REDIMENSIONA OS ITENS RESTANTES PARA CABER NA TELA */
+  
+  /* Diminui o título principal */
+  .header-left h1 {
+    font-size: 1.2rem; 
+  }
+
+  /* Diminui o botão da loja */
+  .ButtonShop {
+    padding: 8px 15px;
+    font-size: 25px;
+    margin-right: 0; /* O gap do flexbox já cuida do espaçamento */
+  }
+
+  /* Diminui o espaçamento entre os ícones da direita */
+  .header-right {
+    gap: 10px;
+  }
+  
+
+
+  /* Ajusta a fonte no menu de indicações para melhor leitura */
+  .info-indicacoes {
+    font-size: 1em;
+    padding: 12px 15px;
+  }
+
+  .info-indicacoes .referral-count {
+    font-size: 1em;
+  }
+}

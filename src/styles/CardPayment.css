@@ -197,7 +197,7 @@
 
 
   .btn-home {
-    max-width: 15%;
+    max-width: 100px;
     transition: 0.2s;
     width: 200px;
     height: 40px;
@@ -350,5 +350,22 @@
   
     .card-container {
       width: 100%; /* Garante que também ocupe a largura total */
+    }
+    .btn-home {
+      /* 1. Traz o botão de volta para o fluxo normal da página */
+      position: static;
+      
+      /* 2. Centraliza o botão e adiciona um espaço embaixo */
+      display: block;
+      margin: 0 auto 1px auto; /* Margem: 0 topo, auto laterais, 30px embaixo */
+
+      /* 3. Define uma largura flexível */
+      width: 90%;
+      max-width: 250px; /* Limita a largura máxima */
+    }
+    /* ========================================= */
+    .title {
+      font-size: 20px;
+      margin-bottom: 20px;
     }
   }
