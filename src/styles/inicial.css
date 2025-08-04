@@ -1,354 +1,294 @@
+/* ========================================================= */
+/* === CSS REATORADO E OTIMIZADO PARA A LANDING PAGE (V2) === */
+/* ========================================================= */
+
+/* --- IMPORTAÇÃO DE FONTES E CONFIGURAÇÕES GLOBAIS --- */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://db.onlinewebfonts.com/c/f4c9951744c0ef14010218fc1b2f7938?family=Larsseit-Bold');
 @import url('https://db.onlinewebfonts.com/c/f940f28d4cd3e9e610ef07217f115995?family=Neuzeit+Grotesk+Light');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-.main{
-  background: linear-gradient(to bottom, #000 1570px, #131117 1700px, #131117 2430px,#1c1824 2300px, #1c1824 3100px,#131117 3270px);
-  min-height: auto; /* Remove altura forçada */
-  height: auto;
+/* Reset básico para garantir consistência */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-  .caixa-texto-chamativa{
-    font-family: "Larsseit-Bold",sans-serif;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    font-size: 30px;
-    margin-top: -550px;
-    top: -290px;
-    color: white;
-  }
-
-  .caixa-texto-subchamativa{
-    font-family: "Neuzeit Grotesk Light",sans-serif;
-    margin-left: 250px;
-    right: 130px;
-    top: -320px;
-    position: relative;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    display: flex;
-    font-size: 12px;
-    color: #878589;
-  }
-
-  .botao-CTA{
-    background: linear-gradient(#4e006a, #c800b0); /* Degradê roxo */
-    cursor: pointer;
-    margin-left: 250px;
-    left: 450px;
-    top: -250px;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    border-radius: 50px; /* Deixa o botão oval */
-    padding: 12px 30px;
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Espaço entre o texto e a seta */  
-    transition: 0.3s;
-    position: relative;
-}
-  .botao-CTA:hover{
-    background: linear-gradient(90deg,#67076e, #550b55); /* Nova cor */
-    transform: scale(1.1); /* Expande o botão */
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Efeito de sombra */
-    cursor: pointer;
-  }
-
-  .botao-Login {
-    margin-left: 480px;
-    margin-top: -83px;
-    left: 450px;
-    top: -208px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    padding: 8px 0;
-    display: block;
-    background: none;
-    color: #6a11cb; /* Cor padrão caso gradiente não carregue */
-    
-    /* Gradiente aplicado ao texto */
-    background-image: linear-gradient(90deg, #8f07c0, #c800b0); /* Novo gradiente */
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    
-    /* Faz o gradiente ser aplicado ao texto */
-    -webkit-text-fill-color: transparent; /* Torna o texto transparente para mostrar o gradiente */
-    -webkit-background-clip: text; /* Aplica o gradiente ao texto */
-    background-clip: text; /* Aplica o gradiente ao texto */
-    
-    text-decoration: none; /* Remove sublinhado padrão */
-  }
-  
-  /* Sublinhado sempre visível, mas fraco inicialmente */
-  .botao-Login::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, rgba(106, 17, 203, 0.4), rgba(161, 41, 197, 0.4)); /* Gradiente mais fraco */
-    opacity: 0.6; /* Sublinhado sempre visível, mas mais fraco */
-    transform: scaleX(1);
-    transform-origin: left;
-    transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
-  }
-  
-  /* Animação ao passar o mouse: preenche da esquerda para a direita e fica mais intenso */
-  .botao-Login:hover::after {
-    background: linear-gradient(90deg, #6a11cb, #a129c5); /* Gradiente mais intenso */
-    opacity: 1;
-    transform: scaleX(0); /* Começa invisível para animação */
-    animation: underlineFill 0.4s ease-in-out forwards;
-  }
-  
-  /* Animação do preenchimento da esquerda para a direita */
-  @keyframes underlineFill {
-    from {
-      transform: scaleX(0);
-    }
-    to {
-      transform: scaleX(1);
-    }
-  }
-
-
-.botoesloginup-container{
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center; /* Centraliza horizontalmente */
-  gap: 40px;
-  position:fixed;
-  z-index: 10;
-  top: 35px; /* Distância do topo */
-  right: 70px;
-}
-
-.signup{
-  background: linear-gradient(90deg, #6a11cb, #a129c5); /* Degradê roxo */
-  cursor: pointer;
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #000;
   color: white;
+}
+
+/* --- ESTRUTURA PRINCIPAL --- */
+.main {
+  background: linear-gradient(to bottom, #000 1000px, #131117 1200px, #131117 2430px, #1c1824 2300px, #1c1824 3100px, #131117 3270px);
+}
+
+
+.botoesloginup-container {
+  display: flex;
+  justify-content: flex; /* Alinha os botões para o final (direita) */
+  align-items: center;
+  gap: 20px;
+  padding: 20px 40px; /* Adiciona espaçamento do topo e da direita da página */
+  position: relative; /* Garante que o z-index funcione corretamente */
+  z-index: 10; /* Coloca o cabeçalho acima de outros elementos com position: relative */
+}
+
+/* --- SEÇÃO HERO (PRINCIPAL) - CORRIGIDA --- */
+.animation-container {
+  width: 100%;
+  height: 100vh; /* Define a altura da animação. Ajuste conforme necessário. */
+  max-height: 850px; /* Limite máximo de altura */
+}
+
+   .animation-container iframe {
+    /* 1. Faz o iframe ser maior que o container */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120%; /* Aumenta a largura em 50% */
+    height: 120%; /* Aumenta a altura em 50% */
+
+    /* 2. Aplica o "zoom-out" (escala) e ajusta a posição */
+    transform: scale(0.83); /* 1 / 1.5 = 0.667 */
+    transform-origin: top left; /* Começa a escalar do canto superior esquerdo */
+    border: none;
+  }
+
+.hero-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.caixa-texto-chamativa {
+  font-family: "Larsseit-Bold", sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(151, 61, 255);
+}
+
+.caixa-texto-subchamativa {
+  font-family: "Neuzeit Grotesk Light", sans-serif;
+  font-size: 1.1rem;
+  color: #878589;
+  max-width: 600px;
+}
+
+.centralizedDiv {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+/* --- ESTILOS DE BOTÕES GERAIS --- */
+.botao-CTA, .signup, .login, .botao-teste, .btn {
+  cursor: pointer;
   font-size: 18px;
   font-weight: bold;
   border: none;
-  border-radius: 50px; /* Deixa o botão oval */
+  border-radius: 50px;
   padding: 12px 30px;
-  display: flex;
-  align-items: center;/* Espaço entre o texto e a seta */  
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.signup:hover{
-  background: linear-gradient(90deg,#67076e, #550b55); /* Nova cor */
-  transform: scale(1.1); /* Expande o botão */
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Efeito de sombra */
+.botao-CTA, .signup, .botao-teste, .btn {
+  background: linear-gradient(90deg, #6a11cb, #c800b0);
+  color: white;
 }
 
-/* Criando a borda gradiente */
-.login{
-  padding: 12px 30px;
-  font-size: 18px;
-  color: #6a11cb; /* Cor do texto inicial */
+.botao-CTA:hover, .signup:hover, .botao-teste:hover, .btn:hover {
+  background: linear-gradient(90deg, #67076e, #550b55);
+  transform: scale(1.05);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.login {
+  color: #6a11cb;
   background-color: transparent;
-  border: 2px solid transparent; /* Remove a borda padrão */
-  border-radius: 30px; /* Bordas arredondadas */
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-  
-  /* Criando a borda com gradiente */
-  background-image: linear-gradient(white, white), 
-                    linear-gradient(90deg, #6a11cb, #a129c5);
+  border: 2px solid transparent;
+  background-image: linear-gradient(white, white), linear-gradient(90deg, #6a11cb, #a129c5);
   background-origin: border-box;
-  background-clip: padding-box, border-box; /* Mantém o gradiente na borda */
+  background-clip: padding-box, border-box;
 }
 
-/* Efeito hover */
-.login:hover{
-  color: white; /* Texto branco ao passar o mouse */
-  background-image: linear-gradient(90deg,#67076e, #550b55); /* Preenche com gradiente */
+.login:hover {
+  color: white;
+  background-image: linear-gradient(90deg, #67076e, #550b55);
 }
 
-.passo-container {
-  background: linear-gradient(90deg, #6a11cb, #a129c5); /* Fundo roxo */
-  padding: 10px 20px;
-  text-align: center;
-  border-radius: 60px;
-  max-width: 1300px; /* Largura máxima */
-  height: 330px; /* Reduzi a altura do fundo */
-  margin: 100px auto; /* Centraliza o contêiner */
+.botao-Login {
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #6a11cb;
+  background-image: linear-gradient(90deg, #8f07c0, #c800b0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   position: relative;
-  margin-top: 200px;
+  padding-bottom: 4px;
+}
+
+.botao-Login::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #6a11cb, #a129c5);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease-in-out;
+}
+
+.botao-Login:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* --- SEÇÃO PASSO A PASSO --- */
+.passo-container {
+  padding: 80px 20px;
+  text-align: center;
+  max-width: 1300px;
+  margin: 100px auto;
+  background: linear-gradient(90deg, #6a11cb, #a129c5);
+  border-radius: 60px;
 }
 
 .titulo {
   font-family: "Larsseit-Bold", sans-serif;
   color: white;
-  font-size: 40px;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 2; /* Mantém o título acima do fundo */
+  font-size: 2.5rem;
+  margin-bottom: 60px;
 }
 
 .passos {
-  margin-top: 50px;
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  position: relative;
-  z-index: 1; /* Faz as caixas brancas ultrapassarem o fundo roxo */
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap; 
+  margin-top: -120px; 
 }
 
 .passo {
   background-color: white;
-  border-radius: 60px;
-  padding: 40px;
-  width: 30%;
+  border-radius: 40px;
+  padding: 30px;
+  width: 300px;
   text-align: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  height: 220px; /* Ajustei a altura das caixas */
-  position: relative;
-  z-index: 2; /* Garante que fiquem sobre o fundo roxo */
-  height: 400px;
-}
-
-.passo img {
-  width: 280px;
-  height: 280px;
-  margin-bottom: 10px;
-}
-
-.passo p {
-  font-family: "Larsseit-Bold",sans-serif;
-  font-size: 13px;
-  color: black;
-  font-weight: bold;
-  margin-top: 3px;
-}
-
-.botao-teste{
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(90deg, #6a11cb, #a129c5); /* Degradê roxo */
-  cursor: pointer;
-  margin-left: 700px;
-  margin-top: 150px;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  border-radius: 50px; /* Deixa o botão oval */
-  padding: 20px 150px;  
-  align-items: center;
-  gap: 10px; /* Espaço entre o texto e a seta */  
-  transition: 0.3s;
-  visibility: visible;
-  opacity: 1;
-}
-.botao-teste:hover{
-  background: linear-gradient(90deg,#67076e, #550b55); /* Nova cor */
-  transform: scale(1.1); /* Expande o botão */
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Efeito de sombra */
-}
-
-.reviews-container {
-  margin-top: 0px;
-  padding: 50px 20px;
-  text-align: center;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 15px;
 }
 
-/* Wrapper para centralizar avaliações */
+.passo img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+}
+
+.passo p {
+  font-family: "Larsseit-Bold", sans-serif;
+  font-size: 1rem;
+  color: black;
+  font-weight: bold;
+}
+
+/* --- SEÇÃO REVIEWS --- */
+.reviews-section {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.reviews-title {
+  font-family: "Larsseit-Bold", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: white;
+}
+
 .reviews-wrapper {
   display: flex;
-  gap: 20px;
-  max-width: 800px;
   justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  color: white;
 }
 
-/* Cartão de avaliação */
 .review-card {
   background: #1e1d23;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 350px;
-  color: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 380px;
   text-align: left;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  height: 260px;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  position: relative;
+  min-height: 250px;
 }
 
-/* Texto da avaliação */
 .review-text {
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  margin-bottom: 15px;
-  flex-grow: 1;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
 
-/* Informações do usuário */
 .review-user {
-  position: absolute;
-  bottom: 20px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 15px;
-  margin-bottom: 0;
+  gap: 15px;
 }
 
-/* Imagem do usuário */
 .user-image {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
 }
 
-/* Nome e cargo */
 .user-name {
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 .user-role {
   font-family: 'Neuzeit Grotesk Light', sans-serif;
-  font-size: 15px;
+  font-size: 0.9rem;
   color: #bbbbbb;
 }
 
-/* Botões de navegação */
 .buttons {
-  margin-top: 20px;
-  gap: 20px;
+  margin-top: 40px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: center;
-
+  gap: 20px;
 }
 
 .nav-button {
   background: white;
   color: black;
   font-size: 24px;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -359,308 +299,192 @@
   transform: scale(1.1);
 }
 
-.reviews-section {
-  text-align: center; /* Cor de fundo semelhante à imagem */
-  padding: 50px 20px;
-  margin-top: 100px;
-}
-
-/* Estilo do título */
-.reviews-title {
-  font-family: "Larsseit-Bold",sans-serif;
-  font-size: 2rem;
-  font-weight: bold;
-  color: white; /* Cor escura para melhor legibilidade */
-  margin-bottom: 20px;
-}
-
-/* Container da aba */
-.reviews-tab-container {
-  font-family: "Larsseit-Bold",sans-serif;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-/* Aba ativa */
-.reviews-tab {
-  font-size: 14px;
-  font-weight: bold;
-  color: white;
-  text-transform: uppercase;
-  padding: 10px 15px;
-  border-bottom: 2px solid white; /* Linha azul sob a aba ativa */
-}
-
-/* Linha separadora abaixo da aba */
-.reviews-divider {
-  width: 80%;
-  margin: 0 auto;
-  height: 1px;
-  background-color: #d1d1d1; /* Linha cinza sutil */
-}
-
-.container-free{
+/* --- SEÇÃO TESTE GRÁTIS --- */
+.container-free {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70vh;
-  position: relative;
-  top: 130px;
+  padding: 100px 20px;
+  text-align: center;
+  color: white;
 }
+
 .content {
-  text-align: center; /* Garante que o texto dentro fique centralizado */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza os elementos verticalmente */
-  justify-content: center; /* Centraliza os elementos horizontalmente */
-  color: white;
-  max-width: 600px;
-  padding: 20px;
-  font-size: 20px;
+  align-items: center;
+  gap: 25px;
+  max-width: 650px;
 }
 
 .content h1 {
   font-family: 'Larsseit-Bold', sans-serif;
-  font-size: 55px; /* Aumenta o tamanho do título */
-  font-weight: bold;
-  white-space: nowrap;
-  text-align: center;
+  font-size: 3.5rem;
 }
 
 .content p {
-  font-size: 18px; /* Define um tamanho específico para o texto */
-  font-family: Arial, sans-serif; /* Muda a fonte */
-  color:#878589; /* Muda a cor do texto */
-  margin-top: -5px;
+  font-size: 1.1rem;
+  color: #878589;
+  line-height: 1.7;
 }
 
 .highlight {
-  text-decoration:underline solid;
+  text-decoration: underline solid;
   text-decoration-color: #32cd32;
+  text-underline-offset: 4px;
 }
 
-.btn{
-  font-family: 'Larsseit-Bold', sans-serif;
-  background: linear-gradient(90deg, #6a11cb, #a129c5); /* Degradê roxo */
-  cursor: pointer;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 15px; /* Deixa o botão oval */
-  transition: 0.3s;
-  width: 150px;
-  height: 50px;
-  text-align: center; /* Garante que o texto dentro fique centralizado */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza os elementos verticalmente */
-  justify-content: center;
-}
-
-.btn:hover{
-  background: linear-gradient(90deg,#67076e, #550b55); /* Nova cor */
-  transform: scale(1.1); /* Expande o botão */
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Efeito de sombra */
-  cursor: pointer;
-}
-
+/* --- FOOTER --- */
 .footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  font-size: 14px;
-  color: #555;
+  gap: 30px;
+  padding: 80px 20px 40px;
   text-align: center;
-  position: relative;
-  width: 100%;
-}
-.footer-links {
-  display: flex;
-  gap: 15px;
-  position: relative;
-  top: 40px;
+  border-top: 1px solid #222;
 }
 
-.footer-links a {
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-logo-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logoFOO {
+  width: 60px;
+  height: 60px;
+}
+
+.company-nameFoo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.footer-links a, .footer-links button {
   text-decoration: none;
   color: white;
   font-weight: bold;
+  transition: color 0.3s;
 }
 
-.footer-links a:hover {
-  text-decoration: underline;
-  color:#6a11cb;
+.footer-links a:hover, .footer-links button:hover {
+  color: #a129c5;
+}
+
+.download {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #32cd32 !important;
 }
 
 .footer-text {
-  max-width: 600px;
-  position: relative;
-  top: 60px;
-  font-size: 13px;
-  font-family: 'Poppins', sans-serif;
-}
-
-.footer-links a:nth-child(5){
-  color: #32cd32;
-}
-
-.footer-links button{
-  background: none;
-  border: none;
-  color: #32cd32;
-  cursor: pointer;
-  font-size: 12px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: bold;
-  position: relative;
-  top: -1px;
-}
-
-.footer-links button:hover{
-  text-decoration: underline;
-}
-
-.download .icon {
-  font-size: 12px;
-  color: #32cd32;
-}
-.logoFOO{
-  width: 70px;
-  height: 70px;
-  margin-left: -1050px;
-  position: relative;
-  top: 155px;
-}
-
-.company-nameFoo{
-  margin-left: -850px;
-  position: relative;
-  top: 83px;
-}
-
-.infoadd{
+  font-size: 0.8rem;
   color: #555;
-  font-size: 11px;
-  margin-left: -870px;
-  position: relative;
-  top: 100px;
+  max-width: 600px;
 }
 
-.status-container{
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  padding: 20px;
-  border-radius: 8px;
-  margin-right: -1000px;
-  position: relative;
-  top: -56px;
-}
+/* ================================================= */
+/* === AJUSTES RESPONSIVOS PARA DISPOSITIVOS MÓVEIS === */
+/* ================================================= */
 
-/* Texto "STATUS" */
-.status-label {
-  font-family: 'Larsseit-Bold', sans-serif;
-  font-size: 12px;
+@media (max-width: 768px) {
+  /* --- CABEÇALHO --- */
+   .botoesloginup-container {
+    justify-content: center; /* Centraliza os botões em telas menores */
+    padding: 20px 15px;
+    /* As propriedades right e transform foram removidas e o posicionamento não é mais fixo */
+  }
+
+  .signup {
+    display: none;
+  }
+.login {
+  /* --- Estilo Base --- */
+  padding: 12px 24px;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 600;
   color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 5px;
+  
+  /* --- Fundo e Borda --- */
+  background-image: linear-gradient(90deg, #67076e, #550b55);
+  border:none;
+  border-radius: 20px; /* Cantos arredondados */
+  width: 50%;
 }
 
-/* Caixa de status */
-.status-box {
-  display: flex;
-  align-items: center;
-  background-color: #1a2d1f;
-  padding: 10px 16px;
-  border-radius: 8px;
-  position: relative;
-  top:10px;
-}
+  /* --- SEÇÃO HERO --- */
+  .animation-container {
+    height: 100vh; /* Altura menor para celular */
+    /*height: 50vh; /* Altura menor para celular */
+  }
 
-/* Indicador verde (bolinha) */
-.status-indicator {
-  width: 10px;
-  height: 10px;
-  background-color: #32cd32;
-  border-radius: 50%;
-  margin-right: 8px;
-}
+   .animation-container iframe {
+    /* 1. Faz o iframe ser maior que o container */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150%; /* Aumenta a largura em 50% */
+    height: 150%; /* Aumenta a altura em 50% */
 
-/* Texto de status */
-.status-text {
-  font-size: 14px;
-  color: #e0e0e0;
-  font-weight: bold;
-}
+    /* 2. Aplica o "zoom-out" (escala) e ajusta a posição */
+    transform: scale(0.667); /* 1 / 1.5 = 0.667 */
+    transform-origin: top left; /* Começa a escalar do canto superior esquerdo */
+  }
+  .hero-content-container {
+    padding: 40px 20px;
+  }
+  .caixa-texto-chamativa {
+    font-size: 1.2rem;
+  }
+  .caixa-texto-subchamativa {
+    font-size: 0.7rem;
+  }
+  .centralizedDiv {
+    flex-direction: column;
+    gap: 15px;
+  }
 
-.pergunta1, .pergunta3, .pergunta4{
-  font-size: 19px;
-  position: relative;
-  top: 15px;
-}
+  /* --- SEÇÃO PASSO A PASSO --- */
+  .passo-container {
+    padding: 60px 15px;
+    margin-top: 60px;
+  }
+  .titulo {
+    font-size: 2rem;
+  }
+  .passos {
+    margin-top: 0;
+    gap: 20px;
+  }
 
-.resposta1, .resposta2, .resposta3, .resposta4{
-  font-size: 15px;
-  position: relative;
-  right: -470px;
-  top: -12px;
-}
+  /* --- SEÇÃO TESTE GRÁTIS --- */
+  .content h1 {
+    font-size: 2.5rem;
+  }
 
-.pergunta2{
-  font-size: 19px;
-  position: relative;
-  top: 10px;
-}
-.resposta2 a{
-  color: black;
-  text-decoration: underline;
-}
-
-.Titulo{
-  font-weight: bold;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-}
-
-.linha-separadora{
-  width: 100%;
-  margin: 0 auto;
-  height: 1px;
-  background-color: #d1d1d1; /* Linha cinza sutil */
-}
-
-.iframe1 {
-  width: 100%;           /* Faz o contêiner ocupar toda a largura */      /* Define uma altura fixa para o contêiner */
-  max-width: 100%;
-  height: 1050px;    /* Garante que o iframe não ultrapasse a largura da tela */
-  margin: 0 auto;       /* Centraliza o contêiner no meio da tela */
-  display: flex;        /* Usando flexbox para alinhamento */
-  justify-content: center; /* Alinha o iframe horizontalmente ao centro */
-  align-items: center;  /* Alinha o iframe verticalmente ao centro */; /* Adiciona uma cor de fundo ao contêiner */
-  border-radius: 10px;  /* Bordas arredondadas no contêiner */
-  padding: 0px;        /* Espaçamento interno */
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Adiciona sombra suave */
-  position: relative;
-  top: -120px;
-}
-
-/* Estilos para o iframe */
-.iframe1 iframe {
-  border: none;          /* Remove a borda do iframe */
-  width: 100%;
-  height: 100%;           /* Faz o iframe ocupar toda a largura do contêiner */         /* Faz o iframe ocupar toda a altura do contêiner */
-  border-radius: 8px;    /* Bordas arredondadas no iframe */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra no iframe */
-}
-
-img.backgroundphoto{
-  height: 700px;
-  width: 100%;
-  position: relative;
-  top: -120px;
+  /* --- FOOTER --- */
+  .footer-top {
+    flex-direction: column;
+    gap: 30px;
+  }
 }
