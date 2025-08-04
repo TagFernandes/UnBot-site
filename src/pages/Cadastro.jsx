@@ -48,8 +48,8 @@ const Cadastro = () => {
 
   return (
     <header className="header">
-    <button className="header-button" onClick={() => navigate("/")}> Página Inicial</button>
-    <button className="header-button2" onClick={() => navigate("/login")}>Login</button>
+    <button className="header-buttonP" onClick={() => navigate("/")}> Página Inicial</button>
+    <button className="header-button2C" onClick={() => navigate("/login")}>Login</button>
 
     <div className="containerlogin">
         <img src="blob.svg" className="blob" alt="Background Blob" />

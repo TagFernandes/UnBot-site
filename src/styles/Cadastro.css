@@ -325,3 +325,48 @@ input {
   border-image-slice: 1;
 }
   
+
+
+
+/* ================================================= */
+/* === ESTILOS PARA DISPOSITIVOS MÓVEIS (CADASTRO) === */
+/* ================================================= */
+
+@media (max-width: 768px) {
+
+
+  /* 2. REMOVENDO ANIMAÇÃO DE FUNDO */
+  /* Para uma interface mais limpa e performática no mobile. */
+  .blob, .orbit {
+    display: none;
+  }
+  
+  
+  /* 4. TORNANDO O CARD DE CADASTRO RESPONSIVO */
+  /* Esta é a mudança mais importante. */
+  .loginpage {
+    width: 90%; /* Largura relativa em vez de 340px fixos */
+    height: auto; /* A altura se ajustará ao conteúdo, em vez de 600px fixos */
+    padding: 32px 24px; /* Reduz o espaçamento interno */
+  }
+
+  /* 5. AJUSTANDO OS INPUTS DO FORMULÁRIO */
+  /* Garante que os campos de texto ocupem a largura disponível. */
+  .textbox input {
+    width: 100%; /* Ocupa 100% do container pai (.textbox) */
+  }
+
+  /* 6. AJUSTE GERAL DE FONTES E MARGENS */
+  .loginpage h2 {
+    font-size: 17px;
+  }
+
+  .loginpage h3 {
+    font-size: 12px;
+    margin-bottom: 24px;
+  }
+
+  .button-PageCadastro {
+    width: 100%; /* Faz o botão de cadastro ocupar toda a largura */
+  }
+}

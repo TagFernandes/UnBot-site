@@ -1,6 +1,6 @@
 @import url('https://fonts.cdnfonts.com/css/euclid-circular-a');
 
-.header-button {
+.header-buttonP {
   background: linear-gradient(90deg, #6a11cb, #a129c5); /* Degradê roxo */
   cursor: pointer;
   color: white;
@@ -17,7 +17,7 @@
   top: 26px;
 }
 
-.header-button2 {
+.header-button2C {
   background: linear-gradient(90deg, #6a11cb, #a129c5); /* Degradê roxo */
   cursor: pointer;
   color: white;
@@ -34,13 +34,13 @@
   top: 26px;
 }
 
-.header-button:hover {
+.header-buttonP:hover {
   background: linear-gradient(90deg,#67076e, #550b55); /* Nova cor */
   transform: scale(1.1); /* Expande o botão */
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Efeito de sombra */
 }
 
-.header-button2:hover {
+.header-button2C:hover {
   background: linear-gradient(90deg,#67076e, #550b55); /* Nova cor */
   transform: scale(1.1); /* Expande o botão */
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Efeito de sombra */
@@ -259,4 +259,67 @@ input {
 
 .login-resetPass:hover {
   text-decoration: underline;
+}
+
+/* =============================================== */
+/* === ESTILOS PARA DISPOSITIVOS MÓVEIS (CELULAR) === */
+/* =============================================== */
+
+/* Aplicamos estas regras quando a tela tiver no MÁXIMO 768px de largura */
+@media (max-width: 768px) {
+
+  /* 1. AJUSTANDO OS BOTÕES DO TOPO */
+  /* Diminuímos o tamanho e aproximamos das bordas */
+  .containerlogin{
+    width: 90%;
+  }
+
+  .header-buttonP, .header-button2C {
+    font-size: 14px;
+    padding: 10px 18px;
+    top: 15px; /* Sobe um pouco os botões */
+  }
+
+  .header-buttonP {
+    left: 15px; /* Mais perto da borda esquerda */
+  }
+
+  .header-button2C {
+    right: 15px; /* Mais perto da borda direita */
+  }
+
+  /* 2. FAZENDO O CARD DE LOGIN SER RESPONSIVO */
+  /* Esta é a mudança mais importante */
+  .loginpage {
+    width: 90%; /* Ocupa 90% da largura da tela, em vez de 340px fixos */
+    max-width: 340px; /* Garante que não fique maior que o design original */
+    padding: 48px 24px 32px; /* Reduz o espaçamento interno */
+  }
+
+  .loginpage img {
+    width: 80px; /* Diminui um pouco a logo */
+    margin-bottom: 24px;
+  }
+  
+  /* 3. SIMPLIFICANDO O FUNDO ANIMADO */
+  /* Em telas menores, a animação pode distrair e consumir bateria/desempenho.
+     É uma boa prática simplificar ou remover. */
+  .blob, .orbit {
+    display: none; /* Esconde a animação de fundo para focar no formulário */
+  }
+
+  /* 4. AJUSTES FINAIS DE ESPAÇAMENTO E FONTE */
+  .loginpage h2 {
+    font-size: 17px;
+  }
+  
+  .loginpage h3 {
+    font-size: 12px;
+    margin-bottom: 24px;
+  }
+
+  .loginpage p {
+    font-size: 14px;
+    margin-top: 24px; /* Reduz o espaço acima do "Não possui uma conta?" */
+  }
 }
