@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
   
-.header-button{
+.header-buttonP-1{
   background: linear-gradient(90deg, #6a11cb, #a129c5); /* Degradê roxo */
   cursor: pointer;
   color: white;
@@ -17,7 +17,7 @@
   top: 26px;
 }
 
-.header-button2 {
+.header-button2C-1 {
   background: linear-gradient(90deg, #6a11cb, #a129c5); /* Degradê roxo */
   cursor: pointer;
   color: white;
@@ -34,13 +34,13 @@
   top: 26px;
 }
 
-.header-button:hover {
+.header-buttonP-1:hover {
   background: linear-gradient(90deg,#67076e, #550b55); /* Nova cor */
   transform: scale(1.1); /* Expande o botão */
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Efeito de sombra */
 }
 
-.header-button2:hover {
+.header-button2C-1:hover {
   background: linear-gradient(90deg,#67076e, #550b55); /* Nova cor */
   transform: scale(1.1); /* Expande o botão */
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Efeito de sombra */
@@ -334,20 +334,29 @@ input {
 
 @media (max-width: 768px) {
 
-
+  .header-button2C-1{
+    display: none;
+  }
+  .header-buttonP-1 {
+    display: none;
+  }
   /* 2. REMOVENDO ANIMAÇÃO DE FUNDO */
   /* Para uma interface mais limpa e performática no mobile. */
   .blob, .orbit {
     display: none;
   }
-  
+  .containerlogin {
+  z-index: -5;
+  }
   
   /* 4. TORNANDO O CARD DE CADASTRO RESPONSIVO */
   /* Esta é a mudança mais importante. */
   .loginpage {
     width: 90%; /* Largura relativa em vez de 340px fixos */
     height: auto; /* A altura se ajustará ao conteúdo, em vez de 600px fixos */
+    max-height: 80%;
     padding: 32px 24px; /* Reduz o espaçamento interno */
+    padding-top: 100px;
   }
 
   /* 5. AJUSTANDO OS INPUTS DO FORMULÁRIO */
