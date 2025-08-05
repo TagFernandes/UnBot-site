@@ -21,41 +21,42 @@ function App() {
 
   const reviews = [
     {
-      text: "Pulsetic is an amazing monitoring tool! It has saved our company countless times from unexpected downtime.",
-      name: "Leo Bassam",
-      role: "Founder, CEO at Plutio",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      text: "Adeus, noites em claro! O UnBot garantiu minha vaga enquanto eu dormia. Simplesmente essencial.",
+      name: "Ana",
+      role: "Estudante de Engenharia",
+      image: "https://randomuser.me/api/portraits/women/31.jpg",
     },
     {
-      text: "The UI is clean and easy to use. I love the alert system that notifies me instantly if something goes wrong.",
-      name: "Chris Kalmar",
-      role: "Founder at nineLemon",
+      text: "Tecnologia que funciona de verdade. O UnBot resolve o problema das matrículas de forma brilhante e sem rodeios.",
+      name: "Lucas",
+      role: "Estudante de ciências da computação",
       image: "https://randomuser.me/api/portraits/men/34.jpg",
     },
     {
-      text: "We've tried many monitoring tools, but Pulsetic stands out with its simplicity and efficiency.",
-      name: "Akis Laopodis",
-      role: "Founder of HelpfulDocs",
-      image: "https://randomuser.me/api/portraits/men/45.jpg",
+      text: "Consegui vaga naquela matéria impossível! O UnBot funcionou perfeitamente quando eu já tinha perdido as esperanças.",
+      name: "Mariana",
+      role: "Estudante de Comunicação",
+      image: "https://randomuser.me/api/portraits/women/11.jpg",
     },
     {
-      text: "Pulsetic provides reliable notifications across multiple channels like Slack and SMS. A must-have tool!",
-      name: "Andrei Negrau",
-      role: "CEO at Cartloop.io",
+      text: "A maior economia de tempo da faculdade. O UnBot cuida da matrícula para que você possa focar no que realmente importa.",
+      name: "Pedro",
+      role: "Estudante de Administração",
       image: "https://randomuser.me/api/portraits/men/47.jpg",
     },
     {
-      text: "Amazing support and features. We've optimized our uptime monitoring like never before!",
-      name: "Sophie Turner",
-      role: "CTO at CloudSoft",
-      image: "https://randomuser.me/api/portraits/women/42.jpg",
+      text: "Como aluna nova na universidade, o sistema era confuso. O UnBot tornou tudo mais fácil e me salvou de muita dor de cabeça na primeira matrícula.",
+      name: "Júlia",
+      role: "Estudante de Relações Internacionais",
+      image: "https://randomuser.me/api/portraits/women/15.jpg",
     },
     {
-      text: "Pulsetic is now part of our daily operations. It ensures that our infrastructure stays online 24/7.",
-      name: "John Doe",
-      role: "Tech Lead at WebStack",
-      image: "https://randomuser.me/api/portraits/men/50.jpg",
+      text: "Eu trabalho e estudo, então não tenho tempo a perder. Programei o robô uma vez e ele fez todo o trabalho por mim. Ferramenta perfeita para quem tem a rotina corrida.",
+      name: "Rafael,",
+      role: "Estudante de Educação Física",
+      image: "https://randomuser.me/api/portraits/men/31.jpg",
     },
+
   ];
   
   const nextReviews = () => {
@@ -142,7 +143,7 @@ function App() {
               <div className="review-card" key={i}>
                 <p className="review-text">"{review.text}"</p>
                 <div className="review-user">
-                  <img src={review.image} alt={review.name} className="user-image" />
+                  <img src={review.image} alt="" className="user-image" />
                   <div>
                     <h4 className="user-name">{review.name}</h4>
                     <p className="user-role">{review.role}</p>
@@ -152,8 +153,38 @@ function App() {
             ))}
           </div>
           <div className="buttons">
-            <button className="nav-button" onClick={prevReviews}>&#129128;</button>
-            <button className="nav-button" onClick={nextReviews}>&#129130;</button>
+            <button className="nav-button" onClick={prevReviews}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 5 12 12 19"></polyline>
+                </svg>
+              </button>
+            <button className="nav-button" onClick={nextReviews}>
+              <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 19 19 12 12 5"></polyline>
+              </svg>
+            </button>
           </div>
         </div>
       </section>
@@ -178,7 +209,7 @@ function App() {
           </div>
           <div className="footer-links">
             <button className="download" onClick={handleDownload}>
-              Baixar o Unbot <span className="icon">&#129131;</span>
+              Baixar o Unbot
             </button>
             <a href="/cadastro">Teste Grátis</a>
           </div>

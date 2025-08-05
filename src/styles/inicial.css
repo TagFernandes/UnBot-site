@@ -430,6 +430,8 @@ body {
   border:none;
   border-radius: 20px; /* Cantos arredondados */
   width: 50%;
+
+  display: none; /* Teste para esconder o botão de Login, se quiser que ele apareça so tirar essa linha */
 }
 
   /* --- SEÇÃO HERO --- */
