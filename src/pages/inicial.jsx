@@ -124,7 +124,7 @@ function App() {
           </div>
           <div className="passo">
             <img src="Passo2.png" alt="Passo 2" />
-            <p><strong>2. Fazer o Download do Bot no botão indicado e logar na plataforma. <br /> PS: Caso acione o antívirus, clique em mais informações e executar</strong></p>
+            <p><strong>2. Fazer o Download do Bot no botão indicado e logar na plataforma.</strong></p>
           </div>
           <div className="passo">
             <img src="Passo3.png" alt="Passo 3" />
