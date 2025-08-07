@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/api";
-import { useNavigate } from 'react-router-dom';
 
 const PixCodePayment = () => {
   const { id } = useParams();
@@ -10,21 +9,75 @@ const PixCodePayment = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Ref para guardar o ID do intervalo e poder limpá-lo depois
+  const intervalRef = useRef(null);
+
+  // Efeito 1: Busca os dados visuais do PIX (QR Code, valor) UMA VEZ.
   useEffect(() => {
-    const fetchPixData = async () => {
+    const fetchInitialPixData = async () => {
       try {
         const response = await api.post("/PixGetData", { id });
         setPixData(response.data);
       } catch (err) {
-        setError("Erro ao carregar dados do Pix.");
-        console.error(err);
+        // Se a primeira busca já falhar, o seu interceptor de rotas
+        // provavelmente já fará o redirecionamento.
+        setError("Não foi possível carregar os dados do PIX.");
+        console.error("Erro na busca inicial:", err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPixData();
+    fetchInitialPixData();
   }, [id]);
+
+  // Efeito 2: Inicia a VERIFICAÇÃO SILENCIOSA em segundo plano.
+  useEffect(() => {
+    const verifyPaymentStatus = async () => {
+      console.log("Verificando status do pagamento...", new Date().toLocaleTimeString());
+      try {
+        // Chama o endpoint de verificação. Não nos importamos com o resultado
+        // se ele for bem-sucedido, apenas se ele falhar com 401.
+        await api.post("/verifyPremium", { id });
+        // Se chegou aqui, o PIX ainda está pendente. Não fazemos nada.
+
+      } catch (err) {
+        // VERIFICA SE O ERRO É O 401 ESPERADO
+        if (err.response && err.response.status === 401) {
+          console.log("Pagamento confirmado (401)! Recarregando página para redirecionamento...");
+
+          // 1. Para o intervalo para não continuar verificando
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+          }
+
+          // 2. ACIONA O RECARREGAMENTO COMPLETO
+          // Isso fará com que sua <ProtectedRoute> seja reavaliada.
+          window.location.reload();
+
+        } else {
+          // Para qualquer outro erro, paramos para não sobrecarregar
+          console.error("Erro inesperado durante a verificação:", err);
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+          }
+        }
+      }
+    };
+
+    // Inicia o intervalo que chama a função de verificação a cada 30 segundos
+    intervalRef.current = setInterval(verifyPaymentStatus, 30000);
+
+    // FUNÇÃO DE LIMPEZA: Essencial para parar o intervalo se o usuário
+    // navegar para outra página manualmente.
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [id]); // Dependência em 'id' para reiniciar o timer se o id mudar.
+
+  // --- O resto do seu componente JSX permanece o mesmo ---
 
   const formatDateBR = (dateStr) => {
     if (!dateStr) return "";
@@ -73,12 +126,15 @@ const PixCodePayment = () => {
       </div>
 
       <div style={styles.details}>
-        <p><strong>Status:</strong> <span style={{ color: isExpired ? "#e63946" : "#2a9d8f" }}>{pixData.status === "integrado" ? "pago" : pixData.status}</span></p>
+        <p><strong>Status:</strong> <span style={{ color: pixData.status === 'integrado' ? "#2a9d8f" : (isExpired ? "#e63946" : "#333") }}>
+            {pixData.status === "integrado" ? "Pago" : (isExpired ? "Expirado" : pixData.status)}
+          </span>
+        </p>
         <p><strong>Data de criação:</strong> {formatDateBR(pixData.creationDate)}</p>
         <p><strong>Validade:</strong> {formatDateBR(pixData.expDate)}</p>
       </div>
 
-      {isExpired && (
+      {isExpired && pixData.status !== 'integrado' && (
         <div style={styles.expiredBox}>
           ⚠️ O código Pix expirou. Gere um novo para continuar.
         </div>
