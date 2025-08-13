@@ -20,22 +20,30 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #000;
   color: white;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 /* --- ESTRUTURA PRINCIPAL --- */
 .main {
-  background: linear-gradient(to bottom, #000 1000px, #131117 1200px, #131117 2430px, #1c1824 2300px, #1c1824 3100px, #131117 3270px);
+  background: linear-gradient(to bottom, #000 0%, #000 40%, #131117 20%, #000 40%, #131117 60%, #000 80%, #131117 100%);
 }
 
 
 .botoesloginup-container {
   display: flex;
-  justify-content: flex; /* Alinha os botões para o final (direita) */
+  justify-content: flex-end; /* Alinha os botões para o final (direita) */
   align-items: center;
   gap: 20px;
   padding: 20px 40px; /* Adiciona espaçamento do topo e da direita da página */
-  position: relative; /* Garante que o z-index funcione corretamente */
-  z-index: 10; /* Coloca o cabeçalho acima de outros elementos com position: relative */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10; /* Coloca o cabeçalho bem acima da imagem de fundo */
 }
 
 /* --- SEÇÃO HERO (PRINCIPAL) - CORRIGIDA --- */
@@ -45,28 +53,51 @@ body {
   max-height: 850px; /* Limite máximo de altura */
 }
 
-   .animation-container iframe {
-    /* 1. Faz o iframe ser maior que o container */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 120%; /* Aumenta a largura em 50% */
-    height: 120%; /* Aumenta a altura em 50% */
-
-    /* 2. Aplica o "zoom-out" (escala) e ajusta a posição */
-    transform: scale(0.83); /* 1 / 1.5 = 0.667 */
-    transform-origin: top left; /* Começa a escalar do canto superior esquerdo */
-    border: none;
-  }
 
 .hero-content-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 60px 20px;
+  justify-content: center;
+  gap: 32px;
+  padding: 120px 20px 40px 20px;
   text-align: center;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
+
+.hero-content-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Gradiente que vai do transparente (no topo) para o preto (na base) */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 90%, #000 100%);
+  z-index: 0; /* Coloca o gradiente na camada 0 */
+}
+
+  /* Imagem de fundo ocupa toda a área da div */
+  .Background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .caixa-texto-chamativa,
+  .caixa-texto-subchamativa,
+  .centralizedDiv {
+    position: relative;
+    z-index: 1;
+  }
 
 .caixa-texto-chamativa {
   font-family: "Larsseit-Bold", sans-serif;
@@ -85,8 +116,8 @@ body {
 .centralizedDiv {
   display: flex;
   align-items: center;
-  gap: 25px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 /* --- ESTILOS DE BOTÕES GERAIS --- */
@@ -162,55 +193,90 @@ body {
   transform-origin: left;
 }
 
+.Background{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+}
+
+.como-funciona{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 0;
+  gap: 7px;
+}
+
+.como-funciona h1{
+  color: white;
+  font-size: 2.8rem;
+}
+
+.como-funciona h2{
+  color: #605e62;
+  font-weight: normal;
+  font-size: 1.8rem;
+}
+
 /* --- SEÇÃO PASSO A PASSO --- */
 .passo-container {
   padding: 80px 20px;
   text-align: center;
-  max-width: 1300px;
-  margin: 100px auto;
-  background: linear-gradient(90deg, #6a11cb, #a129c5);
+  max-width: 1300px;  
+  margin: 15px auto;
   border-radius: 60px;
 }
 
-.titulo {
-  font-family: "Larsseit-Bold", sans-serif;
-  color: white;
-  font-size: 2.5rem;
-  margin-bottom: 60px;
-}
-
-.passos {
+.filhos {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap; 
-  margin-top: -120px; 
+  gap: 32px;
 }
 
-.passo {
-  background-color: white;
-  border-radius: 40px;
-  padding: 30px;
-  width: 300px;
-  text-align: center;
-  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
+.borda{
+  border: 2px solid #605e62;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #1c1824;
+  width: 420px;
+  min-height: 140px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+
+.Content{
+  display: flex;
+  flex-direction: column; /* Empilha os itens verticalmente */
+  align-items: flex-start; /* Alinha todos os itens à esquerda */
+  text-align: left;
+  gap: 10px;
+}
+
+.Content .alinhartitulo {
+  display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
-.passo img {
-  width: 100%;
-  max-width: 250px;
-  height: auto;
-}
-
-.passo p {
-  font-family: "Larsseit-Bold", sans-serif;
-  font-size: 1rem;
-  color: black;
+.Content h1{
+  color: white;
   font-weight: bold;
+  font-size: 1.2rem;
+  font-family: "Larsseit-Bold", sans-serif;
+}
+
+.Content h2{
+  color: #8d9094;
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: "Larsseit-Bold", sans-serif;
 }
 
 /* --- SEÇÃO REVIEWS --- */

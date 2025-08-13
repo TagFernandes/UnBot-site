@@ -2,6 +2,9 @@ import React from "react";
 import "../styles/inicial.css"; // Certifique-se que este é o caminho para o CSS refatorado
 import { useNavigate } from 'react-router-dom'; 
 import { useState, useEffect, useCallback } from "react";
+import SignUpIcon from "../components/SignUp";
+import DownloadIcon from "../components/Donwload";
+import VideoPlayerIcon from "../components/Video";
 
 function App() {
   const navigate = useNavigate();
@@ -83,17 +86,8 @@ function App() {
       {/* ========================================================= */}
       {/* === INÍCIO DA ESTRUTURA CORRIGIDA === */}
       {/* ========================================================= */}
-
-      {/* 1. A animação agora é o primeiro bloco de conteúdo da página */}
-      <div className="animation-container">
-        <iframe
-          src="https://my.spline.design/prismcoin-df48d0ba11b5187e213b2aada3c062da/"
-          title="PrismCoin"
-        />
-      </div>
-      <br /><br />
-      {/* 2. O conteúdo de texto e botões vem DEPOIS, como um bloco separado */}
       <div className="hero-content-container">
+        <img className="Background" src="BackGround.png"></img>
         <div className="caixa-texto-chamativa">
           <h1>O software para sua graduação</h1>
         </div>
@@ -114,29 +108,54 @@ function App() {
       {/* === FIM DA ESTRUTURA CORRIGIDA === */}
       {/* ========================================================= */}
 
-      {/* O resto da página continua normalmente a partir daqui */}
+    <div className="Passos-Total">
+      <div className="como-funciona">
+        <h1>Como Funciona?</h1>
+        <h2>Três passos simples para garantir sua vaga.</h2>
+      </div>
+
       <div className="passo-container" id="passoapasso">
-        <h2 className="titulo">Passo a Passo!</h2>
-        <div className="passos">
-          <div className="passo">
-            <img src="Passo1.png" alt="Passo 1" />
-            <p><strong>1. Realizar Cadastro e Login no site.</strong></p>
-          </div>
-          <div className="passo">
-            <img src="Passo2.png" alt="Passo 2" />
-            <p><strong>2. Fazer o Download do Bot no botão indicado e logar na plataforma.</strong></p>
-          </div>
-          <div className="passo">
-            <img src="Passo3.png" alt="Passo 3" />
-            <p><strong>3. Escolher as informações da matéria e clicar no ícone para iniciá-lo.</strong></p>
+      <div className="filhos">
+
+        <div className="borda">
+          <div className="Content">
+            <div className="alinhartitulo">
+              <SignUpIcon />
+              <h1>Cadastre-se e faça login</h1>
+            </div>
+            <h2>Crie sua conta e conecte com segurança. Tudo pronto em menos de 1 minuto</h2>
           </div>
         </div>
+
+        <div className="borda">
+          <div className="Content">
+            <div className="alinhartitulo">
+              <DownloadIcon />
+              <h1>Baixe o UnBot</h1>
+            </div>
+            <h2>Instale o UnBot no seu computador e faça login com a mesma conta.</h2>
+          </div>
+        </div>
+
+
+        <div className="borda">
+          <div className="Content">
+            <div className="alinhartitulo">
+              <VideoPlayerIcon />
+              <h1>Escolha a matéria e inicie</h1>
+            </div>
+            <h2>Defina turma e código; o UnBot monitora e confirma sua matrícula automaticamente.</h2>
+          </div>
+        </div>
+
       </div>
+      </div>
+    </div>
       
       <br />
 
       <section className="reviews-section">
-        <h2 className="reviews-title">O que as pessoas estão dizendo sobre o UnBot</h2>
+        <h2 className="reviews-title">O que as pessoas estão dizendo sobre o UnBot:</h2>
         <div className="reviews-container">
           <div className="reviews-wrapper">
             {reviews.slice(index, index + 2).map((review, i) => (
@@ -192,7 +211,7 @@ function App() {
       <div className="container-free">
         <div className="content">
           <h1>
-            Garanta seu bot <span className="highlight">imediatamente</span>! 
+            <span style={{fontSize: '1.2em'}}>Garanta seu bot</span> <span className="highlight" style={{fontSize: '1em'}}>imediatamente</span>!
           </h1>
           <p>
             1 bot gratuito, infinitas possibilidades de matérias. Disponível apenas durante a matrícula extraordinária. Garanta Já!
