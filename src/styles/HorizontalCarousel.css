@@ -1,0 +1,106 @@
+/* src/components/HorizontalCarousel/HorizontalCarousel.css */
+
+/* Estilos da seção e do container fixo (permanecem os mesmos) */
+.carousel-section {
+  position: relative;
+  height: 150vh;
+}
+
+.carousel-sticky-container {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card-list {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Estilos do card (base permanece a mesma) */
+.card {
+  position: relative;
+  height: 450px;
+  width: 450px;
+  flex-shrink: 0; 
+  overflow: hidden;
+  background-color: #e5e5e5;
+  border-radius: 12px;
+}
+
+.card-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 300ms ease-in-out;
+  /* Adiciona um desfoque e escurece a imagem de fundo para melhor legibilidade */
+  filter: blur(4px) brightness(0.6);
+}
+
+.card:hover .card-background {
+  transform: scale(1.1);
+  filter: blur(2px) brightness(0.5); /* Efeito de foco sutil */
+}
+
+/* Camada de conteúdo com novo layout flexível */
+.card-content-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Empurra o texto para cima e o autor para baixo */
+  padding: 2.5rem;
+  color: white;
+}
+
+/* --- NOVOS ESTILOS PARA O REVIEW --- */
+
+/* Estilo para o texto do review (a citação) */
+.review-text {
+  font-size: 1.75rem; /* Ajustado para caber mais texto */
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.4;
+  text-align: left;
+  margin: 0;
+}
+
+/* Container para as informações do autor */
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Espaço entre a imagem e o texto */
+}
+
+/* Imagem/avatar do autor */
+.review-author-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Container para nome e função */
+.review-author-details {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Nome do autor */
+.review-author-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Função/curso do autor */
+.review-author-role {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}

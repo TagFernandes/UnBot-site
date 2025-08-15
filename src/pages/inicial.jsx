@@ -5,10 +5,10 @@ import { useState, useEffect, useCallback } from "react";
 import SignUpIcon from "../components/SignUp";
 import DownloadIcon from "../components/Donwload";
 import VideoPlayerIcon from "../components/Video";
+import HorizontalCarousel from "../components/HorizontalCarrossel";
 
 function App() {
   const navigate = useNavigate();
-  const [index, setIndex] = useState(0);
 
   const handleDownload = useCallback(() => {
       navigate('/download');
@@ -22,53 +22,6 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  const reviews = [
-    {
-      text: "Adeus, noites em claro! O UnBot garantiu minha vaga enquanto eu dormia. Simplesmente essencial.",
-      name: "Ana",
-      role: "Estudante de Engenharia",
-      image: "https://randomuser.me/api/portraits/women/31.jpg",
-    },
-    {
-      text: "Tecnologia que funciona de verdade. O UnBot resolve o problema das matrículas de forma brilhante e sem rodeios.",
-      name: "Lucas",
-      role: "Estudante de ciências da computação",
-      image: "https://randomuser.me/api/portraits/men/34.jpg",
-    },
-    {
-      text: "Consegui vaga naquela matéria impossível! O UnBot funcionou perfeitamente quando eu já tinha perdido as esperanças.",
-      name: "Mariana",
-      role: "Estudante de Comunicação",
-      image: "https://randomuser.me/api/portraits/women/11.jpg",
-    },
-    {
-      text: "A maior economia de tempo da faculdade. O UnBot cuida da matrícula para que você possa focar no que realmente importa.",
-      name: "Pedro",
-      role: "Estudante de Administração",
-      image: "https://randomuser.me/api/portraits/men/47.jpg",
-    },
-    {
-      text: "Como aluna nova na universidade, o sistema era confuso. O UnBot tornou tudo mais fácil e me salvou de muita dor de cabeça na primeira matrícula.",
-      name: "Júlia",
-      role: "Estudante de Relações Internacionais",
-      image: "https://randomuser.me/api/portraits/women/15.jpg",
-    },
-    {
-      text: "Eu trabalho e estudo, então não tenho tempo a perder. Programei o robô uma vez e ele fez todo o trabalho por mim. Ferramenta perfeita para quem tem a rotina corrida.",
-      name: "Rafael,",
-      role: "Estudante de Educação Física",
-      image: "https://randomuser.me/api/portraits/men/31.jpg",
-    },
-
-  ];
-  
-  const nextReviews = () => {
-    setIndex((prevIndex) => (prevIndex + 2) % reviews.length);
-  };
-
-  const prevReviews = () => {
-    setIndex((prevIndex) => (prevIndex - 2 + reviews.length) % reviews.length);
-  };
   
   if (!isVisible) {
     return null;
@@ -144,69 +97,20 @@ function App() {
               <VideoPlayerIcon />
               <h1>Escolha a matéria e inicie</h1>
             </div>
-            <h2>Defina turma e código; o UnBot monitora e confirma sua matrícula automaticamente.</h2>
+            <h2>Defina turma e código que o UnBot monitora e confirma sua matrícula automaticamente.</h2>
           </div>
         </div>
 
       </div>
       </div>
+    </div>  
+
+    <div className="review-header">
+      <h1>O que nossos usuários dizem</h1>
+      <h2>Histórias reais de quem transformou sua matrícula com o UnBot.</h2>
     </div>
-      
-      <br />
 
-      <section className="reviews-section">
-        <h2 className="reviews-title">O que as pessoas estão dizendo sobre o UnBot:</h2>
-        <div className="reviews-container">
-          <div className="reviews-wrapper">
-            {reviews.slice(index, index + 2).map((review, i) => (
-              <div className="review-card" key={i}>
-                <p className="review-text">"{review.text}"</p>
-                <div className="review-user">
-                  <img src={review.image} alt="" className="user-image" />
-                  <div>
-                    <h4 className="user-name">{review.name}</h4>
-                    <p className="user-role">{review.role}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="buttons">
-            <button className="nav-button" onClick={prevReviews}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 5 12 12 19"></polyline>
-                </svg>
-              </button>
-            <button className="nav-button" onClick={nextReviews}>
-              <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              >
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 19 19 12 12 5"></polyline>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </section>
+     <HorizontalCarousel />
 
       <div className="container-free">
         <div className="content">
