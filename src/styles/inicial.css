@@ -110,7 +110,7 @@ body {
 .centralizedDiv {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 32px;
   margin-top: 8px;
 }
 
@@ -167,6 +167,7 @@ body {
   -webkit-text-fill-color: transparent;
   position: relative;
   padding-bottom: 4px;
+  left: 3rem;
 }
 
 .botao-Login::after {
@@ -434,14 +435,7 @@ body {
   /* --- Estilo Base --- */
   padding: 12px 24px;
   font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 600;
-  color: white;
-  
   /* --- Fundo e Borda --- */
-  background-image: linear-gradient(90deg, #67076e, #550b55);
-  border:none;
-  border-radius: 20px; /* Cantos arredondados */
   width: 50%;
 
 }
@@ -460,6 +454,14 @@ body {
   .centralizedDiv {
     flex-direction: column;
     gap: 15px;
+    align-items: center;
+  }
+  .botao-Login {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 320px;
   }
 
   /* --- SEÇÃO PASSO A PASSO --- */

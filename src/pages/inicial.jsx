@@ -52,7 +52,7 @@ function App() {
             Cadastre-se <span className="arrow">➜</span>
           </button>
           <button className="botao-Login" onClick={() => navigate('/login')}>
-            Já tenho uma conta? Fazer login
+            Possuo uma conta? Fazer login
           </button>
         </div>
       </div>
@@ -127,7 +127,7 @@ function App() {
       <footer className="footer">
         <div className="footer-top">
           <div className="footer-logo-info">
-            <img src="logo2.svg" alt="Logo da Empresa" className="logoFOO" />
+            <img src="favicon.svg" alt="Logo da Empresa" className="logoFOO" />
             <h1 className="company-nameFoo">UnBot</h1>
           </div>
           <div className="footer-links">
