@@ -426,7 +426,7 @@ body {
 
 @media (max-width: 768px) {
   /* --- CABEÇALHO --- */
-   .botoesloginup-container {
+  .botoesloginup-container {
     justify-content: center; 
     padding: 20px 15px;
   }
@@ -462,6 +462,7 @@ body {
     justify-content: center;
     width: 100%;
     max-width: 320px;
+    left: 0px;
   }
 
   /* --- SEÇÃO PASSO A PASSO --- */
