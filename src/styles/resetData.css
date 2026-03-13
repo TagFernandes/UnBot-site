@@ -118,14 +118,14 @@
   right: -12px;
 }
   
-.loginPage {
+.loginPageResetData {
   position: relative;
   z-index: 2;
   background: #ffffff;
   border-radius: 24px;
   padding: 72px 32px 48px;
   width: 340px;
-  height: 95vh;
+  height: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -135,37 +135,37 @@
   font-family: 'Euclid Circular A', sans-serif;
 }
 
-.loginPage img {
+.loginPageResetData img {
   width: auto;
   margin: 0 0 32px;
 }
 
-.loginPage :is(h2, h3) {
+.loginPageResetData :is(h2, h3) {
   font-weight: 500;
   font-family: 'Euclid Circular A', sans-serif;
 }
 
-.loginPage h2 {
+.loginPageResetData h2 {
   font-size: 18px;
   margin: 0 0 6px;
   font-family: 'Euclid Circular A', sans-serif;
 }
 
-.loginPage h3 {
+.loginPageResetData h3 {
   color: var(--color-muted);
   font-size: 13px;
   margin: 0 0 32px;
   font-family: 'Euclid Circular A', sans-serif;
 }
 
-.loginPage form {
+.loginPageResetData form {
   display: grid;
   gap: 12px;
   width: 100%;
   margin: 0 0 20px;
 }
 
-.loginPage :is(input) {
+.loginPageResetData :is(input) {
   height: 52px;
   font-family: inherit;
   font-size: 15px;
@@ -175,7 +175,7 @@
   border-radius: 8px;
 }
 
-.loginPage .textbox {
+.loginPageResetData .textbox {
   position: relative;
 }
 
@@ -532,7 +532,7 @@ input {
   
   /* 4. TORNANDO O CARD DE CADASTRO RESPONSIVO */
   /* Esta é a mudança mais importante. */
-  .loginPage {
+  .loginPageResetData {
     width: 90%; /* Largura relativa em vez de 340px fixos */
     height: auto; /* A altura se ajustará ao conteúdo, em vez de 600px fixos */
     max-height: 80%;
@@ -547,11 +547,11 @@ input {
   }
 
   /* 6. AJUSTE GERAL DE FONTES E MARGENS */
-  .loginPage h2 {
+  .loginPageResetData h2 {
     font-size: 17px;
   }
 
-  .loginPage h3 {
+  .loginPageResetData h3 {
     font-size: 12px;
     margin-bottom: 24px;
   }

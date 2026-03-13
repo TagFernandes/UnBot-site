@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react'; // Adicionado useCallback
-import { FaUserCircle, FaShoppingCart } from 'react-icons/fa'; // FaBell removido se não usado
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import '../styles/HeaderBar.css';
 import { useAuth } from '../contexts/AuthContext';
 import api from "../api/api";
-import { AiOutlineDownload } from "react-icons/ai"; 
+import { AiOutlineDownload, AiOutlineEdit } from "react-icons/ai"; 
+import { FaUserCircle, FaShoppingCart, FaSignOutAlt } from 'react-icons/fa';
 
 // import { AiOutlineDownload } from "react-icons/ai"; // Removido se não usado
 
@@ -105,6 +105,11 @@ const HeaderBar = () => {
     navigate('/download');
   }, [navigate]);
 
+  const handleResetData = useCallback(() => {
+    navigate('/resetData');
+    setIsUserDropdownOpen(false); // Fecha o dropdown após clicar
+  }, [navigate]);
+
   const toggleUserDropdown = useCallback(() => {
     setIsUserDropdownOpen(prevIsOpen => !prevIsOpen);
   }, []);
@@ -129,37 +134,52 @@ const HeaderBar = () => {
         </button>
       </div>
       <div className="header-right">
-      <button className='ButtonShop' onClick={handleRedirectDonwload}>
+        <button className='ButtonShop' onClick={handleRedirectDonwload}>
           <AiOutlineDownload className="DownloadIcon"/>
         </button>
         <div className="user-menu-container" ref={dropdownRef}>
           <button onClick={toggleUserDropdown} className="user-icon-button" aria-expanded={isUserDropdownOpen} aria-label="User menu">
             <FaUserCircle className="icon" />
           </button>
+
           {isUserDropdownOpen && (
             <div className="user-dropdown">
-              <div className="dropdown-item username-display">
-                <span>{username}</span>
-                <div className="referral-status-container">
-                  <div className="referral-info">
-                  <p class="info-indicacoes">Suas Indicações: <span class="referral-count">{indicacoes}</span></p>
-                  </div>
-                  {goalIndicacoes > 0 && ( // Mostra barra apenas se houver meta
-                    <div className="referral-progress-wrapper">
-                      <div
-                        className="referral-progress-bar"
-                        style={{ width: `${progressPercentage}%` }}
-                        title={`${Math.round(progressPercentage)}% completo`}
-                      >
-                        {/* Opcional: mostrar porcentagem dentro da barra */}
-                        {/* {Math.round(progressPercentage)}% */}
-                      </div>
-                    </div>
-                  )}
-                </div>
+              {/* CABEÇALHO DO DROPDOWN */}
+              <div className="dropdown-header">
+                <span className="user-label">Logado como:</span>
+                <span className="username-text">{username}</span>
               </div>
-              <button className="dropdown-item logout-button-dropdown" onClick={handleLogout}>
-                Sair
+
+              {/* STATUS DE INDICAÇÃO */}
+              <div className="dropdown-referral-section">
+                <div className="referral-pill">
+                  <span className="pill-text">Indicações:</span>
+                  <span className="pill-number">{indicacoes}</span>
+                </div>
+                {goalIndicacoes > 0 && (
+                  <div className="mini-progress-container">
+                    <div
+                      className="mini-progress-bar"
+                      style={{ width: `${progressPercentage}%` }}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="dropdown-divider" />
+
+              {/* BOTÃO ATUALIZAR DADOS (NOVO) */}
+              <button className="dropdown-action-item reset-data-btn" onClick={handleResetData}>
+                <AiOutlineEdit className="item-icon" />
+                <span>Atualizar Dados</span>
+              </button>
+
+              <div className="dropdown-divider" />
+
+              {/* BOTÃO SAIR */}
+              <button className="dropdown-action-item logout-btn-new" onClick={handleLogout}>
+                <FaSignOutAlt className="item-icon" />
+                <span>Sair da conta</span>
               </button>
             </div>
           )}

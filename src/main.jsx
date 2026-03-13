@@ -9,6 +9,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Cadastro from './pages/Cadastro';
 import ResetPassord from './pages/ResetPass';
+import ResetData from './pages/ResetData';
 import Inicial from './pages/inicial';
 import PixCode from './pages/pixCodePayment';
 import BridgePage from './pages/BridgePage';
@@ -29,6 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/reset_password" element={<ResetPassord />} />
           <Route path="/download" element={<PaginaDownload/>} />
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="/resetData" element={<ProtectedRoute><ResetData /></ProtectedRoute>} />
           <Route path="/payment/pix/pixCodePayment/:id" element={<ProtectedRoute><ProtectedPaymentRoute><PixCode /></ProtectedPaymentRoute></ProtectedRoute>} />
           <Route path="/payment/credit-card" element={<ProtectedRoute><ProtectedPaymentRoute><CardPayment /></ProtectedPaymentRoute></ProtectedRoute>} />
           <Route path="/payment/pix" element={<ProtectedRoute><ProtectedPaymentRoute><PixPayment /></ProtectedPaymentRoute></ProtectedRoute>} />

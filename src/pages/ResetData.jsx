@@ -1,16 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Cadastro.css';
+import '../styles/resetData.css';
 import api from '../api/api';
+import Cookies from 'js-cookie';
 
-const Cadastro = () => {
+const ResetData = () => {
+  const [username, setUsername] = useState('');
   const [formData, setFormData] = useState({
-    matricula: '',
     senha: '',
-    indicacao: '',
     cpf: '',
     nascimento: '',
   });
+
+
+  useEffect(() => {
+    const userFromCookie = Cookies.get('MatriculaSigaaBot');
+    setUsername(userFromCookie || 'Usuário');
+
+    const fetchUserData = async () => {
+      try {
+        const response = await api.post("/userData");
+        // Verificamos se data existe para evitar erro de 'undefined'
+        if (response.data) {
+          const { cpf, nascimento } = response.data;
+
+          setFormData(prev => ({
+            ...prev,
+            // Só sobrescreve se o valor retornado não for nulo/vazio
+            cpf: cpf || prev.cpf,
+            nascimento: nascimento || prev.nascimento
+          }));
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados do usuário:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  
 
   const [message, setMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -65,33 +94,28 @@ const Cadastro = () => {
     setIsLoading(true);
     try {
       // O envio continua enviando as strings puras (ex: 00000000000)
-      const response = await api.post('/cadastro', formData);
-      setMessage(response.data.message || 'Cadastro realizado!');
-      setTimeout(() => navigate('/login'), 3000);
+      const response = await api.post('/Update_userData', formData);
+      setMessage(response.data.message || 'Dados atualizados!');
+      setTimeout(() => navigate('/home'), 3000);
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || 'Erro ao cadastrar.');
+      setErrorMessage(error.response?.data?.message || 'Erro ao atualizar dados.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <header className="header">
-      <button className="header-buttonP-1" onClick={() => navigate("/")}>Página Inicial</button>
-      <button className="header-button2C-1" onClick={() => navigate("/login")}>Login</button>
-
+    <>
+      <header className="header">
+      <button className="header-buttonP-1" onClick={() => navigate("/home")}>Home</button>
       <div className="containerlogin">
-        <div className="loginPage">
+        <div className="loginPageResetData">
           <img src="exam.png" className="logologin" alt="Logo" />
-          <h2>UnBot SignUp</h2>
-          <h3>Cadastre sua Conta Já!</h3>
+          <h2>{username}</h2>
+          <h3>Atualizar dados Cadastrais do UnBot</h3>
 
           <div className="cadastro-right-login">
             <form className="form" onSubmit={handleSubmit}>
-              <div className="textbox">
-                <input type="text" name="matricula" value={formData.matricula} onChange={handleChange} required />
-                <label>Matrícula</label>
-              </div>
 
               <div className="textbox">
                 <input type="password" name="senha" value={formData.senha} onChange={handleChange} required />
@@ -129,16 +153,9 @@ const Cadastro = () => {
                 <label>Nascimento (Opcional)</label>
               </div>
 
-              <div className="input-line-container">
-                <input type="text" name="indicacao" value={formData.indicacao} onChange={handleChange} placeholder=" " />
-                <label>Código de indicação</label>
-              </div>
-
               <button className='button-PageCadastro' type="submit" disabled={isLoading}>
-                {isLoading ? 'Carregando...' : 'Cadastrar'}
+                {isLoading ? 'Carregando...' : 'Atualizar Dados'}
               </button>
-
-              <button className="btn-GoToLogin" type="button" onClick={() => navigate('/login')}>Já possui conta?</button>
 
               {errorMessage && <div className="cadastro-error-message">{errorMessage}</div>}
               {message && <div className="cadastro-success-message">{message}</div>}
@@ -172,7 +189,8 @@ const Cadastro = () => {
         </div>
       )}
     </header>
+    </>
   );
 };
 
-export default Cadastro;
+export default ResetData;
