@@ -1,24 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  FiArrowLeft,
+  FiArrowRight,
+  FiUser,
+  FiLock,
+  FiEye,
+  FiEyeOff,
+  FiAlertCircle,
+} from "react-icons/fi";
 import api from "../api/api";
 import { useAuth } from "../contexts/AuthContext";
-import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
+import "../styles/inicial.css";
+import "../styles/Login.css";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, []);
+  const reduce = useReducedMotion();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,7 +32,7 @@ function LoginPage() {
 
     try {
       const response = await api.post("/login", { username, password });
-      
+
       if (response.data && response.data.user) {
         login(response.data.user, response.data.matricula);
         setTimeout(() => {
@@ -48,7 +53,9 @@ function LoginPage() {
           setError(`Requisição Inesperada`);
         }
       } else if (error.request) {
-        setError("Não foi possível conectar ao servidor. Verifique sua conexão ou tente mais tarde.");
+        setError(
+          "Não foi possível conectar ao servidor. Verifique sua conexão ou tente mais tarde."
+        );
       } else {
         setError("Ocorreu um erro ao tentar fazer login.");
       }
@@ -58,63 +65,134 @@ function LoginPage() {
     }
   };
 
-  if (!isVisible) {
-    return null;
-  }
+  const ease = [0.16, 1, 0.3, 1];
 
-    return (      
-      <header className="header">
-        <button className="header-buttonP" onClick={() => navigate("/")}> Página Inicial</button>
-        <button className="header-button2C" onClick={() => navigate("/Cadastro")}>Cadastre-se</button>
+  return (
+    <div className="ub-landing ub-auth">
+      <div className="ub-grain" aria-hidden />
+      <div className="ub-auth__aurora" aria-hidden />
+      <div className="ub-auth__bggrid" aria-hidden />
 
-      <div className="containerlogin">
-        <img src="blob.svg" className="blob" alt="Background Blob" />
-        <div className="orbit"></div>
+      <main className="ub-auth__stage">
+        <div className="ub-auth__pulse" aria-hidden>
+          <span className="ub-auth__ring" />
+          <span className="ub-auth__ring" />
+          <span className="ub-auth__ring" />
+        </div>
 
-        <div className="loginpage">
-          <img src="logo.png" className="logologin" alt="Logo" />
-          <h2>UnBot Login</h2>
-          <h3>Garanta sua Matrícula Já!</h3>
+        <motion.div
+          className="ub-auth__card"
+          initial={reduce ? false : { opacity: 0, y: 20, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, ease }}
+        >
+          <div className="ub-auth__glow" aria-hidden />
 
-          <form className="form" onSubmit={handleLogin}>
-            <div className="textbox">
-              <input
-                type="text"
-                name="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-              <label>Usuário</label>
+          <a className="ub-auth__back" onClick={() => navigate("/")}>
+            <FiArrowLeft /> Página inicial
+          </a>
+
+          <div className="ub-auth__brand">
+            <img src="favicon.svg" alt="UnBot" />
+            <span>UnBot</span>
+          </div>
+
+          <h1 className="ub-auth__title">
+            Bem-vindo de <span className="ub-grad">volta.</span>
+          </h1>
+          <p className="ub-auth__subtitle">
+            Entre e garanta sua matrícula enquanto você dorme.
+          </p>
+
+          <form className="ub-auth__form" onSubmit={handleLogin} noValidate>
+            <div className="ub-field">
+              <label htmlFor="username">Usuário</label>
+              <div className="ub-input">
+                <FiUser aria-hidden />
+                <input
+                  id="username"
+                  type="text"
+                  name="username"
+                  autoComplete="username"
+                  placeholder="seu usuário"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+              </div>
             </div>
-            <div className="textbox">
-              <input
-                type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <label>Senha</label>
+
+            <div className="ub-field">
+              <label htmlFor="password">Senha</label>
+              <div className="ub-input">
+                <FiLock aria-hidden />
+                <input
+                  id="password"
+                  type={showPass ? "text" : "password"}
+                  name="password"
+                  autoComplete="current-password"
+                  placeholder="sua senha"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="ub-input__toggle"
+                  onClick={() => setShowPass((v) => !v)}
+                  aria-label={showPass ? "Ocultar senha" : "Mostrar senha"}
+                >
+                  {showPass ? <FiEyeOff /> : <FiEye />}
+                </button>
+              </div>
+              <a href="/reset_password" className="ub-auth__forgot">
+                Esqueceu sua senha?
+              </a>
             </div>
+
+            {error && (
+              <motion.p
+                className="ub-auth__error"
+                initial={reduce ? false : { opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                role="alert"
+              >
+                <FiAlertCircle aria-hidden />
+                {error}
+              </motion.p>
+            )}
 
             <button
-              className={`btn-login ${loading ? "loading" : ""}`}
+              className={`ub-btn ub-btn--solid ub-btn--lg ub-auth__submit ${
+                loading ? "is-loading" : ""
+              }`}
               type="submit"
               disabled={loading}
             >
-              {loading ? "Carregando..." : "Entrar"}
+              {loading ? (
+                <>
+                  <span className="ub-auth__spinner" aria-hidden />
+                  Entrando...
+                </>
+              ) : (
+                <>
+                  Entrar
+                  <FiArrowRight />
+                </>
+              )}
             </button>
-            {error && <p style={{ color: "red" }}>{error}</p>}
           </form>
-          <a href="/reset_password" className="login-resetPass">Esqueceu sua senha?</a>
-          <p className="footerlogin">
-            Não possui uma Conta? <a href="/Cadastro">Registre-se!</a>
-          </p>
-        </div>
-      </div>
-      </header>
-    );
-  }
 
-  export default LoginPage;
+          <p className="ub-auth__footer">
+            Não possui uma conta?{" "}
+            <a href="/Cadastro" className="ub-auth__link">
+              Registre-se!
+            </a>
+          </p>
+        </motion.div>
+      </main>
+    </div>
+  );
+}
+
+export default LoginPage;
