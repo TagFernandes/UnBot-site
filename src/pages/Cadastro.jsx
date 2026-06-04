@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   FiArrowLeft,
   FiArrowRight,
@@ -10,6 +10,11 @@ import {
   FiEyeOff,
   FiAlertCircle,
   FiCheckCircle,
+  FiCreditCard,
+  FiCalendar,
+  FiInfo,
+  FiAlertTriangle,
+  FiX,
   FiClock,
   FiZap,
   FiActivity,
@@ -41,42 +46,71 @@ const Cadastro = () => {
     matricula: "",
     senha: "",
     indicacao: "",
+    cpf: "",
+    nascimento: "",
   });
+
   const [showPass, setShowPass] = useState(false);
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const reduce = useReducedMotion();
 
+  // Máscara de CPF (000.000.000-00) — apenas exibição
+  const maskCPF = (value) =>
+    value
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+      .replace(/(-\d{2})\d+?$/, "$1");
+
+  // Máscara de Data (00/00/0000) — apenas exibição
+  const maskDate = (value) =>
+    value
+      .replace(/\D/g, "")
+      .replace(/(\d{2})(\d)/, "$1/$2")
+      .replace(/(\d{2})(\d)/, "$1/$2")
+      .replace(/(\d{4})\d+?$/, "$1");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === "cpf" || name === "nascimento") {
+      // Guarda apenas os números no estado para o backend
+      const onlyNums = value.replace(/\D/g, "");
+      setFormData({ ...formData, [name]: onlyNums });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
     setMessage("");
+
+    const { cpf, nascimento } = formData;
+    if ((cpf && !nascimento) || (!cpf && nascimento)) {
+      setErrorMessage(
+        "Preencha CPF e Data de Nascimento juntos ou deixe ambos vazios."
+      );
+      return;
+    }
+
     setIsLoading(true);
-
     try {
+      // Envia as strings puras (ex: 00000000000)
       const response = await api.post("/cadastro", formData);
-      const successMessage =
-        response.data.message || "Cadastro realizado com sucesso!";
-      setMessage(successMessage);
-      console.log(response.data);
-
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
+      setMessage(response.data.message || "Cadastro realizado!");
+      setTimeout(() => navigate("/login"), 3000);
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setErrorMessage(error.response.data.message || "Erro desconhecido.");
-      } else {
-        setErrorMessage("Erro ao realizar o cadastro. Tente novamente.");
-      }
-      console.error("Erro ao cadastrar:", error);
+      setErrorMessage(error.response?.data?.message || "Erro ao cadastrar.");
     } finally {
       setIsLoading(false);
     }
@@ -200,9 +234,60 @@ const Cadastro = () => {
               </div>
             </div>
 
+            {/* divisor com botão de aviso → abre modal */}
+            <button
+              type="button"
+              className="ub-auth__optsplit"
+              onClick={openModal}
+            >
+              <span className="ub-auth__optline" />
+              <span className="ub-auth__opthint">
+                <FiInfo />
+                Dados opcionais (acelera o bot)
+              </span>
+              <span className="ub-auth__optline" />
+            </button>
+
+            <div className="ub-field">
+              <label htmlFor="cpf">
+                CPF <span className="ub-field__opt">(opcional)</span>
+              </label>
+              <div className="ub-input">
+                <FiCreditCard aria-hidden />
+                <input
+                  id="cpf"
+                  type="text"
+                  name="cpf"
+                  inputMode="numeric"
+                  placeholder="000.000.000-00"
+                  value={maskCPF(formData.cpf)}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="ub-field">
+              <label htmlFor="nascimento">
+                Nascimento <span className="ub-field__opt">(opcional)</span>
+              </label>
+              <div className="ub-input">
+                <FiCalendar aria-hidden />
+                <input
+                  id="nascimento"
+                  type="text"
+                  name="nascimento"
+                  inputMode="numeric"
+                  placeholder="DD/MM/AAAA"
+                  value={maskDate(formData.nascimento)}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
             <div className="ub-field">
               <label htmlFor="indicacao">
-                Código de indicação <span className="ub-field__opt">(opcional)</span>
+                Código de indicação{" "}
+                <span className="ub-field__opt">(opcional)</span>
               </label>
               <div className="ub-input">
                 <FiGift aria-hidden />
@@ -263,15 +348,76 @@ const Cadastro = () => {
 
           <p className="ub-auth__footer">
             Já possui uma conta?{" "}
-            <a
-              className="ub-auth__link"
-              onClick={() => navigate("/login")}
-            >
+            <a className="ub-auth__link" onClick={() => navigate("/login")}>
               Entrar
             </a>
           </p>
         </motion.div>
       </main>
+
+      {/* Modal: explica CPF / Nascimento */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            className="ub-modal__overlay"
+            onClick={closeModal}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="ub-modal"
+              onClick={(e) => e.stopPropagation()}
+              initial={reduce ? false : { opacity: 0, y: 24, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, y: 24, scale: 0.96 }}
+              transition={{ duration: 0.35, ease }}
+            >
+              <div className="ub-modal__glow" aria-hidden />
+              <button
+                className="ub-modal__x"
+                onClick={closeModal}
+                aria-label="Fechar"
+              >
+                <FiX />
+              </button>
+
+              <div className="ub-modal__head">
+                <span className="ub-modal__icon">
+                  <FiZap />
+                </span>
+                <h3>Otimize seu bot</h3>
+              </div>
+
+              <div className="ub-modal__body">
+                <p>
+                  Inserir o <strong>CPF</strong> e a{" "}
+                  <strong>Data de Nascimento</strong> é totalmente{" "}
+                  <strong>opcional</strong>.
+                </p>
+                <p>
+                  Mas esses dados permitem que o UnBot identifique sua conta e
+                  consiga <strong>pegar suas matérias muito mais rápido</strong>.
+                </p>
+                <div className="ub-modal__warn">
+                  <FiAlertTriangle aria-hidden />
+                  <span>
+                    <strong>Atenção:</strong> dados errados podem impedir o
+                    funcionamento correto do bot.
+                  </span>
+                </div>
+              </div>
+
+              <button
+                className="ub-btn ub-btn--solid ub-btn--lg ub-modal__cta"
+                onClick={closeModal}
+              >
+                Entendi, vamos lá!
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

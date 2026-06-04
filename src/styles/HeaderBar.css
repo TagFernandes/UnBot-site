@@ -110,19 +110,24 @@
     /* Adicione outras estilizações para o ícone do botão se precisar */
   }
   
-  .user-dropdown {
-    position: absolute;
-    top: 100%; /* Posiciona abaixo do botão do ícone */
-    right: 0; /* Alinha à direita do container pai */
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Garante que fique sobre outros elementos */
-    min-width: 300px; /* Largura mínima para o dropdown */
-    padding: 8px 0; /* Espaçamento interno */
-  }
+.user-dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  min-width: 260px;
+  overflow: hidden;
+  z-index: 1000;
+  animation: slideInDropdown 0.25s ease-out;
+}
   
+@keyframes slideInDropdown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
   .user-dropdown .dropdown-item {
     padding: 8px 16px;
     display: block; /* Faz com que cada item ocupe a largura total */
@@ -246,6 +251,102 @@
   background-color: #0056b3; /* Azul um pouco mais escuro no hover */
 }
 
+/* CABEÇALHO INTERNO */
+.dropdown-header {
+  padding: 16px 20px 8px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #888;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.username-text {
+  font-size: 16px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* SEÇÃO DE INDICAÇÃO */
+.dropdown-referral-section {
+  padding: 8px 20px 16px 20px;
+}
+
+.referral-pill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f0ff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.pill-text { font-size: 13px; color: #6b46c1; font-weight: 500; }
+.pill-number { background: #6b46c1; color: white; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 700; }
+
+.mini-progress-container {
+  height: 6px;
+  background: #edf2f7;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.mini-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #9b4dff, #6b46c1);
+  transition: width 0.5s ease;
+}
+
+/* DIVISOR */
+.dropdown-divider {
+  height: 1px;
+  background: #f1f3f5;
+  margin: 4px 0;
+}
+
+/* ITENS DE AÇÃO (BOTÕES) */
+.dropdown-action-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a5568;
+  transition: all 0.2s;
+}
+
+.dropdown-action-item:hover {
+  background-color: #f7fafc;
+  padding-left: 25px; /* Efeito de slide no hover */
+}
+
+.item-icon {
+  font-size: 18px;
+}
+
+/* CORES ESPECÍFICAS */
+.reset-data-btn:hover {
+  color: #6b46c1;
+}
+
+.logout-btn-new {
+  color: #e53e3e;
+}
+
+.logout-btn-new:hover {
+  background-color: #fff5f5;
+}
 
 
 /* =========================================== */

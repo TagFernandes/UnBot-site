@@ -1,0 +1,178 @@
+/* ============================================================= */
+/* UNBOT — PÁGINA DE DOWNLOAD (espelha a landing)                 */
+/* Tokens herdados de .ub-landing (inicial.css). Escopo: .ub-dl   */
+/* ============================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+.ub-dl {
+  min-height: 100dvh;
+}
+
+.ub-dl__hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding: 120px clamp(20px, 5vw, 60px) 80px;
+  overflow: hidden;
+}
+
+.ub-dl__aurora {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 120%;
+  z-index: 0;
+  background: radial-gradient(
+      50% 50% at 78% 25%,
+      rgba(226, 59, 255, 0.26),
+      transparent 70%
+    ),
+    radial-gradient(45% 45% at 18% 30%, rgba(139, 92, 246, 0.3), transparent 70%),
+    radial-gradient(40% 40% at 60% 75%, rgba(200, 255, 46, 0.07), transparent 70%);
+  filter: blur(20px);
+  animation: ub-dl-drift 18s ease-in-out infinite alternate;
+}
+@keyframes ub-dl-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(-3%, 2%, 0) scale(1.08);
+  }
+}
+
+.ub-dl__grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 70% at 50% 40%,
+    #000 30%,
+    transparent 80%
+  );
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 80%);
+  opacity: 0.5;
+}
+
+.ub-dl__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+.ub-dl__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.ub-dl__title {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+  line-height: 1.03;
+  letter-spacing: -0.028em;
+}
+
+.ub-dl__sub {
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 30em;
+}
+
+.ub-dl__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.ub-dl__features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.ub-dl__features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.ub-dl__features svg {
+  font-size: 1.05rem;
+  color: var(--lime);
+  flex-shrink: 0;
+}
+
+/* ---------- showcase ---------- */
+.ub-dl__visual {
+  perspective: 1400px;
+}
+.ub-dl__frame {
+  position: relative;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 16, 32, 0.7),
+    rgba(10, 8, 18, 0.7)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  padding: 14px;
+  overflow: hidden;
+}
+.ub-dl__frameglow {
+  position: absolute;
+  inset: -1px;
+  z-index: 0;
+  background: var(--grad);
+  opacity: 0.16;
+  filter: blur(34px);
+}
+.ub-dl__frame img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* ============================================================= */
+/* RESPONSIVO                                                     */
+/* ============================================================= */
+@media (max-width: 880px) {
+  .ub-dl__inner {
+    grid-template-columns: 1fr;
+  }
+  .ub-dl__visual {
+    order: -1;
+  }
+  .ub-dl__hero {
+    padding-top: 100px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ub-dl__aurora {
+    animation: none;
+  }
+}

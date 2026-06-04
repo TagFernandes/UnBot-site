@@ -414,6 +414,177 @@
   }
 }
 
+/* ---------- divisor "dados opcionais" (abre modal) ---------- */
+.ub-auth__optsplit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 2px 0;
+  margin: 2px 0;
+}
+.ub-auth__optline {
+  flex: 1;
+  height: 1px;
+  background: var(--line-strong);
+}
+.ub-auth__opthint {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.ub-auth__opthint svg {
+  font-size: 0.95rem;
+  color: var(--violet-hi);
+  animation: ub-auth-hintpulse 2s ease-in-out infinite;
+}
+.ub-auth__optsplit:hover .ub-auth__opthint {
+  color: var(--text);
+}
+@keyframes ub-auth-hintpulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+}
+
+/* ============================================================= */
+/* MODAL (aviso CPF / nascimento)                                 */
+/* ============================================================= */
+.ub-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(5, 4, 9, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.ub-modal {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(22, 18, 34, 0.98),
+    rgba(10, 8, 18, 0.98)
+  );
+  box-shadow: 0 50px 100px -30px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  padding: 30px;
+}
+.ub-modal__glow {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--grad);
+  opacity: 0.18;
+  filter: blur(38px);
+}
+
+.ub-modal__x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.ub-modal__x:hover {
+  color: var(--text);
+  border-color: var(--line-strong);
+}
+
+.ub-modal__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.ub-modal__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: var(--grad);
+  color: #0a0710;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.ub-modal__head h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+}
+
+.ub-modal__body {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+.ub-modal__body strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.ub-modal__warn {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(200, 255, 46, 0.07);
+  border: 1px solid rgba(200, 255, 46, 0.22);
+  color: var(--text);
+  font-size: 0.88rem;
+}
+.ub-modal__warn svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 1.05rem;
+  color: var(--lime);
+}
+
+.ub-modal__cta {
+  justify-content: center;
+  width: 100%;
+  margin-top: 22px;
+}
+
 /* ---------- footer ---------- */
 .ub-auth__footer {
   margin-top: 26px;
@@ -436,6 +607,7 @@
   .ub-auth__pill,
   .ub-auth__line,
   .ub-auth__ring,
+  .ub-auth__opthint svg,
   .ub-auth__spinner {
     animation: none;
   }
