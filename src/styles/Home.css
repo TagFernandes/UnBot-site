@@ -1,232 +1,596 @@
-/* Importando a fonte diretamente no CSS */
-@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
+/* ============================================================= */
+/* UNBOT — PAINEL (área logada)                                   */
+/* Tema claro próprio. Não herda os tokens escuros de .ub-landing */
+/* Escopo: .ub-app                                                */
+/* ============================================================= */
 
-/* Aplicando a fonte globalmente */
-.AppHome {
-    font-family: 'Cabin', sans-serif;
-    padding: 20px;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
 
-    margin: auto; /* Centraliza horizontalmente */
-    flex-direction: column; /* Organiza o conteúdo em coluna */
-    align-items: center; /* Centraliza horizontalmente os elementos filhos */
-    justify-content: center; /* Centraliza verticalmente os elementos filhos */
-    text-align: center; /* Centraliza o texto */
-    max-width: 80%;
-    background-color: rgb(255, 255, 255);
-    min-height: 100vh;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    border-radius: 50px;
-    background: linear-gradient(145deg, #ffffff, #f4f4f4);
+.ub-app {
+  /* superfícies */
+  --app-bg: #f5f5f7;
+  --app-surface: #ffffff;
+  --app-line: #e6e5eb;
+  --app-line-strong: #d2d0da;
 
-      /* --- Efeitos de Sombra Modernos e Suaves --- */
-  box-shadow:
-  /* Sombra principal mais difusa e suave para dar profundidade */
-  0px 25px 50px -12px rgba(0, 0, 0, 0.25),
-  /* Sombra secundária mais próxima para dar um contorno sutil */
-  0px 15px 30px -15px rgba(0, 0, 0, 0.2),
-  /* Leve brilho interno na parte superior para simular reflexo de luz (opcional, mas estiloso) */
-  inset 0px 4px 10px rgba(255, 255, 255, 0.5),
-  /* Leve sombra interna na parte inferior para complementar */
-  inset 0px -4px 6px rgba(0, 0, 0, 0.03); 
-  }
-  
+  /* texto */
+  --app-text: #17151f;
+  --app-muted: #64616f;
+  --app-muted-dim: #8b8797;
 
-/* Estilo das seções */
-.bot-section {
-  margin-bottom: 20px;
+  /* acento único da marca */
+  --app-accent: #6d28d9;
+  --app-accent-hi: #5b21b6;
+  --app-accent-soft: #f3eeff;
+
+  /* estados semânticos */
+  --st-problem: #c2334d;
+  --st-finish: #157a4f;
+  --st-running: #6d28d9;
+
+  --display: "Inter", -apple-system, sans-serif;
+  --body: "Inter", -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+
+  position: relative;
+  min-height: 100dvh;
+  padding: 68px 0 0;
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Contêiner para os botões em grid */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajusta sem forçar o preenchimento */
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
+.ub-app *,
+.ub-app *::before,
+.ub-app *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* ---------- container ---------- */
+.ub-panel {
+  position: relative;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(34px, 5vw, 56px) clamp(18px, 4vw, 40px) 96px;
+}
 
-.ButtonBot {
-    background-color: white;
-    color: black;
-    border-radius: 8px;
-    padding: 20px 30px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
-    text-align: center; /* Centraliza o texto no botão */
-    max-width: 300px;
-    transition: all 0.3s ease; /* Transição suave */
-  }
+/* ============================================================= */
+/* BOTÕES                                                         */
+/* ============================================================= */
+.ubl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  padding: 12px 22px;
+  font-family: var(--body);
+  font-size: 0.94rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s,
+    box-shadow 0.2s;
+}
+.ubl-btn svg {
+  font-size: 1.05em;
+  flex-shrink: 0;
+}
+.ubl-btn:active {
+  transform: translateY(1px);
+}
 
-  .BotsProblem {
-    border: 3px solid red; /* Cor laranja */
-  }
-  
-  .BotsProblem:hover {
-    scale: 1.1;
-    background-color: lightcoral; /* Efeito hover para BotsProblem */
-  }
-  
-  .BotsFinish {
-    border: 3px solid gray; /* Cor vermelha */
-  }
-  
-  .BotsFinish:hover {
-    scale: 1.1;
-    background-color: gray; /* Efeito hover para BotsFinish */
-  }
-  
-  .BotLivre {
-    border: 3px solid rgb(60, 153, 60); /* Cor verde */
-  }
-  
-  .BotLivre:hover {
-    background-color: #45a049;
-    scale: 1.1; /* Efeito hover para BotLivre */
-  }
-  
-  .BotsUso {
-    border: 3px solid purple; /* Cor roxa */
-  }
-  
-  .BotsUso:hover {
-    background-color: purple;
-    color: white; /* Efeito hover para BotsUso */
-  }
+.ubl-btn--solid {
+  background: var(--app-accent);
+  color: #ffffff;
+  box-shadow: 0 8px 20px -10px rgba(109, 40, 217, 0.75);
+}
+.ubl-btn--solid:hover {
+  background: var(--app-accent-hi);
+  box-shadow: 0 12px 26px -10px rgba(109, 40, 217, 0.85);
+}
 
-  .botao-download{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    max-width: 150px;
-    font-size: 25px;
-    transition: all 0.3s ease;
-    position: relative;
-    left: -175px;
-  }
+.ubl-btn--ghost {
+  background: var(--app-surface);
+  color: var(--app-text);
+  border-color: var(--app-line-strong);
+}
+.ubl-btn--ghost:hover {
+  border-color: var(--app-accent);
+  color: var(--app-accent);
+}
 
-  .botao-download:hover{
-    scale: 1.1;
-    max-width: 200px;
-    background-color: darkblue;
-  }
+.ubl-btn--lg {
+  padding: 14px 26px;
+  font-size: 1rem;
+}
 
-  .DownloadIcon{
-    font-size: 35px;
-  }
-/* Estilo do overlay da modal */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Garante que fique acima de outros elementos */
-  }
-  
-  /* Estilo do conteúdo da modal */
-  .modal-content {
-    background: white;
-    border-radius: 8px;
-    padding: 20px 30px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
-  
-  /* Botão de fechar a modal */
-  .close-modal {
-    background: #f44336;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 20px;
-    transition: background-color 0.3s;
-  }
-  
-  .close-modal:hover {
-    background: #d32f2f;
-  }
-  
+/* ============================================================= */
+/* CABEÇALHO DO PAINEL                                            */
+/* ============================================================= */
+.ub-panel__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
+.ub-panel__title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(2rem, 4.2vw, 2.9rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--app-text);
+}
+.ub-panel__title em {
+  font-style: normal;
+  color: var(--app-accent);
+}
 
+.ub-panel__sub {
+  color: var(--app-muted);
+  font-size: 1rem;
+  line-height: 1.55;
+  max-width: 46ch;
+}
 
+/* faixa de saldo + compra — sem caixa, só hairlines */
+.ub-balance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 4vw, 40px);
+  flex-wrap: wrap;
+  margin-top: clamp(26px, 4vw, 38px);
+  padding: 22px 0;
+  border-top: 1px solid var(--app-line);
+  border-bottom: 1px solid var(--app-line);
+  text-align: center;
+}
 
-  /* Estilo do contêiner de carregamento */
-.loading-spinner {
-    display: flex;
+.ub-balance__stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.ub-balance__num {
+  font-family: var(--display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--app-accent);
+}
+.ub-balance__label {
+  font-size: 1rem;
+  color: var(--app-muted);
+}
+.ub-balance__premium {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.ub-balance__premium .ub-balance__label {
+  color: var(--app-text);
+  font-weight: 500;
+}
+
+/* ============================================================= */
+/* GRUPOS DE BOTS                                                 */
+/* ============================================================= */
+.ub-group {
+  --c: var(--st-running);
+  margin-top: clamp(34px, 5vw, 48px);
+}
+
+.ub-group__head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 16px;
+}
+.ub-group__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+  flex-shrink: 0;
+}
+.ub-group__title {
+  font-family: var(--display);
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--app-text);
+}
+.ub-group__count {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--c);
+  border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+  background: color-mix(in srgb, var(--c) 8%, transparent);
+  padding: 3px 9px;
+  border-radius: 100px;
+}
+
+.ub-group__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+  gap: 14px;
+}
+
+/* ---------- card de bot ---------- */
+.ub-bot {
+  --c: var(--st-running);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+  width: 100%;
+  padding: 18px 20px 16px;
+  text-align: left;
+  border: 1px solid var(--app-line);
+  border-radius: 14px;
+  background: var(--app-surface);
+  color: var(--app-text);
+  font-family: var(--body);
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.22s, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.22s;
+}
+.ub-bot::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--c);
+}
+.ub-bot:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--c) 42%, transparent);
+  box-shadow: 0 14px 28px -16px rgba(23, 21, 31, 0.35);
+}
+.ub-bot:active {
+  transform: translateY(0);
+}
+.ub-bot:focus-visible {
+  outline: 2px solid var(--c);
+  outline-offset: 3px;
+}
+
+.ub-bot__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c);
+}
+.ub-bot__status svg {
+  font-size: 0.9rem;
+}
+
+.ub-bot__name {
+  font-family: var(--display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  color: var(--app-text);
+}
+
+.ub-bot__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--app-line);
+}
+.ub-bot__code {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--app-muted);
+}
+.ub-bot__go {
+  font-size: 1rem;
+  color: var(--app-muted-dim);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), color 0.22s;
+}
+.ub-bot:hover .ub-bot__go {
+  color: var(--c);
+  transform: translateX(4px);
+}
+
+/* ============================================================= */
+/* ESTADO VAZIO                                                   */
+/* ============================================================= */
+.ub-empty {
+  margin-top: clamp(34px, 5vw, 48px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: clamp(42px, 6vw, 66px) 28px;
+  border: 1px dashed var(--app-line-strong);
+  border-radius: 18px;
+  background: var(--app-surface);
+}
+.ub-empty__icon {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  font-size: 1.5rem;
+  color: var(--app-accent);
+  background: var(--app-accent-soft);
+}
+.ub-empty h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+  letter-spacing: -0.025em;
+  color: var(--app-text);
+}
+.ub-empty p {
+  color: var(--app-muted);
+  font-size: 0.97rem;
+  line-height: 1.6;
+  max-width: 42ch;
+}
+.ub-empty .ubl-btn {
+  margin-top: 6px;
+}
+
+/* ============================================================= */
+/* CARREGANDO — esqueleto com a forma final                       */
+/* ============================================================= */
+.ub-skel {
+  display: block;
+  border-radius: 8px;
+  background: linear-gradient(
+    100deg,
+    #e9e8ee 30%,
+    #f4f3f7 50%,
+    #e9e8ee 70%
+  );
+  background-size: 300% 100%;
+  animation: ub-shimmer 1.5s ease-in-out infinite;
+}
+@keyframes ub-shimmer {
+  0% {
+    background-position: 160% 0;
+  }
+  100% {
+    background-position: -60% 0;
+  }
+}
+
+.ub-skel--title {
+  width: min(300px, 70%);
+  height: 42px;
+}
+.ub-skel--sub {
+  width: min(420px, 90%);
+  height: 16px;
+}
+.ub-skel--balance {
+  width: min(360px, 80%);
+  height: 46px;
+  margin: 0 auto;
+}
+.ub-skel--grouptitle {
+  width: 170px;
+  height: 18px;
+}
+
+.ub-skelcard {
+  height: 128px;
+  border: 1px solid var(--app-line);
+  border-radius: 14px;
+  background: var(--app-surface);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ub-skelcard span:nth-child(1) {
+  width: 42%;
+  height: 10px;
+}
+.ub-skelcard span:nth-child(2) {
+  width: 78%;
+  height: 18px;
+}
+.ub-skelcard span:nth-child(3) {
+  width: 34%;
+  height: 12px;
+  margin-top: auto;
+}
+
+.ub-loading__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ============================================================= */
+/* SHEET DE DETALHE DO BOT                                        */
+/* ============================================================= */
+.ub-sheet__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(23, 21, 31, 0.42);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.ub-sheet {
+  --c: var(--st-running);
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  border: 1px solid var(--app-line);
+  border-radius: 18px;
+  background: var(--app-surface);
+  box-shadow: 0 40px 80px -24px rgba(23, 21, 31, 0.45);
+  padding: 26px;
+  font-family: var(--body);
+}
+
+.ub-sheet__x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--app-line);
+  border-radius: 10px;
+  background: var(--app-surface);
+  color: var(--app-muted);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.ub-sheet__x:hover {
+  color: var(--app-text);
+  border-color: var(--app-line-strong);
+}
+
+.ub-sheet__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c);
+  border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+  background: color-mix(in srgb, var(--c) 8%, transparent);
+  padding: 6px 12px;
+  border-radius: 100px;
+}
+.ub-sheet__status svg {
+  font-size: 0.92rem;
+}
+
+.ub-sheet__title {
+  margin-top: 15px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.18;
+  letter-spacing: -0.028em;
+  color: var(--app-text);
+}
+
+.ub-sheet__rows {
+  margin-top: 18px;
+}
+.ub-sheet__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 11px 0;
+}
+.ub-sheet__row + .ub-sheet__row {
+  border-top: 1px solid var(--app-line);
+}
+.ub-sheet__row dt {
+  font-family: var(--mono);
+  font-size: 0.67rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--app-muted);
+  flex-shrink: 0;
+}
+.ub-sheet__row dd {
+  font-size: 0.94rem;
+  color: var(--app-text);
+  text-align: right;
+}
+
+.ub-sheet__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--c) 26%, transparent);
+  background: color-mix(in srgb, var(--c) 7%, transparent);
+  color: var(--app-text);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.ub-sheet__note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 1.05rem;
+  color: var(--c);
+}
+
+.ub-sheet__cta {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* ============================================================= */
+/* RESPONSIVO                                                     */
+/* ============================================================= */
+@media (max-width: 720px) {
+  .ub-balance {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Ocupa toda a altura da tela */
-    text-align: center;
+    gap: 18px;
   }
-  
-  /* Estilo do spinner */
-  .spinner {
-    width: 50px;
-    height: 50px;
-    border: 6px solid #f3f3f3; /* Cor do fundo */
-    border-top: 6px solid #3498db; /* Cor principal */
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 10px;
+  .ub-balance .ubl-btn {
+    width: 100%;
   }
+  .ub-group__grid {
+    grid-template-columns: 1fr;
+  }
+  .ub-sheet {
+    padding: 22px 18px;
+  }
+}
 
-
-
-
-  .imageCyborg {
-    margin: 200px auto auto auto;
-    width: 300px;
+@media (prefers-reduced-motion: reduce) {
+  .ub-skel {
+    animation: none;
   }
-  
-  /* Animação do spinner */
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  .ub-bot,
+  .ub-bot__go,
+  .ubl-btn {
+    transition: none;
   }
-
-  .nenhumBotsSpan {
-    display: inline-block;
-    padding: 12px 20px;
-    margin: 10px 0;
-    background-color: #f3e5f5; /* Roxo bem claro */
-    color: #4a148c; /* Roxo escuro para o texto */
-    border-left: 5px solid #9c27b0; /* Roxo vibrante para a borda de destaque */
-    border-radius: 5px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.6;
-    box-shadow: 0 2px 8px rgba(74, 20, 140, 0.08); /* Sombra sutil em tom roxo */
-    transition: all 0.3s ease;
-  }
-  
-  .nenhumBotsSpan::before {
-    content: "🟣 "; /* Emoji roxo como exemplo de ícone */
-    margin-right: 8px;
-    font-weight: bold;
-  }
+}

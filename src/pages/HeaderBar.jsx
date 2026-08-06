@@ -4,10 +4,14 @@ import Cookies from 'js-cookie';
 import '../styles/HeaderBar.css';
 import { useAuth } from '../contexts/AuthContext';
 import api from "../api/api";
-import { AiOutlineDownload, AiOutlineEdit } from "react-icons/ai"; 
-import { FaUserCircle, FaShoppingCart, FaSignOutAlt } from 'react-icons/fa';
-
-// import { AiOutlineDownload } from "react-icons/ai"; // Removido se não usado
+import {
+  FiDownload,
+  FiShoppingCart,
+  FiUser,
+  FiChevronDown,
+  FiEdit3,
+  FiLogOut,
+} from 'react-icons/fi';
 
 const HeaderBar = () => {
   const [username, setUsername] = useState('');
@@ -29,30 +33,19 @@ const HeaderBar = () => {
   useEffect(() => {
     const checkIndicacoes = async () => {
       try {
-        // console.log("HeaderBar: Fazendo requisição para /indicacoes...");
         const response = await api.post("/indicacoes");
-        // console.log("HeaderBar: Resposta de /indicacoes (response.data):", response.data);
 
         if (response.data) {
           const numeroPremioFromAPI = response.data.numero_premio;
           const indicacoesFromAPI = response.data.indicacoes;
 
-          // console.log("HeaderBar: Valor recebido para numero_premio:", numeroPremioFromAPI);
-          // console.log("HeaderBar: Valor recebido para indicacoes:", indicacoesFromAPI);
-
           if (numeroPremioFromAPI !== undefined) {
             setGoalIndicacoes(Number(numeroPremioFromAPI) || 0); // Garante que é um número
-          } else {
-            // console.warn("HeaderBar: response.data.numero_premio é undefined. Estado goalIndicacoes não será alterado.");
           }
 
           if (indicacoesFromAPI !== undefined) {
             setIndicacoes(Number(indicacoesFromAPI) || 0); // Garante que é um número
-          } else {
-            // console.warn("HeaderBar: response.data.indicacoes é undefined. Estado indicacoes não será alterado.");
           }
-        } else {
-          // console.warn("HeaderBar: response.data é undefined ou null. Nenhum estado será alterado.");
         }
       } catch (error) {
         console.error("HeaderBar: Erro ao buscar dados de indicações:", error);
@@ -61,15 +54,6 @@ const HeaderBar = () => {
 
     checkIndicacoes();
   }, []); // Array de dependências vazio: executa uma vez após a montagem inicial
-
-  // Debug logs (opcional, remover em produção)
-  // useEffect(() => {
-  //   console.log("HeaderBar: Estado goalIndicacoes ATUALIZADO:", goalIndicacoes);
-  // }, [goalIndicacoes]);
-
-  // useEffect(() => {
-  //   console.log("HeaderBar: Estado indicacoes ATUALIZADO:", indicacoes);
-  // }, [indicacoes]);
 
   // Otimização: Adiciona/remove o listener apenas quando o dropdown está aberto
   useEffect(() => {
@@ -126,66 +110,93 @@ const HeaderBar = () => {
     : 0;
 
   return (
-    <div className="header-bar">
-      <div className="header-left">
-        <button className='homeTextButton' onClick={handleClick}><h1>UnBot</h1></button>
-        <button className="ButtonShop" onClick={handleRedirect}>
-          <FaShoppingCart className="CartIcon"/>
+    <header className="ub-topbar">
+      <div className="ub-topbar__left">
+        <button className="ub-topbar__brand" onClick={handleClick}>
+          <img src="/favicon.svg" alt="" aria-hidden />
+          <span>UnBot</span>
         </button>
       </div>
-      <div className="header-right">
-        <button className='ButtonShop' onClick={handleRedirectDonwload}>
-          <AiOutlineDownload className="DownloadIcon"/>
+
+      <div className="ub-topbar__right">
+        <button
+          className="ub-topbar__action"
+          onClick={handleRedirectDonwload}
+          title="Baixar o aplicativo"
+        >
+          <FiDownload />
+          <span>Baixar app</span>
         </button>
-        <div className="user-menu-container" ref={dropdownRef}>
-          <button onClick={toggleUserDropdown} className="user-icon-button" aria-expanded={isUserDropdownOpen} aria-label="User menu">
-            <FaUserCircle className="icon" />
+
+        <div className="ub-topbar__menu" ref={dropdownRef}>
+          <button
+            onClick={toggleUserDropdown}
+            className="ub-topbar__user"
+            aria-expanded={isUserDropdownOpen}
+            aria-label="Abrir menu da conta"
+          >
+            <span className="ub-topbar__avatar" aria-hidden>
+              <FiUser />
+            </span>
+            <span className="ub-topbar__ident">
+              <span className="ub-topbar__ident-label">Minha conta</span>
+              <span className="ub-topbar__ident-value">{username}</span>
+            </span>
+            <FiChevronDown className="ub-topbar__caret" aria-hidden />
           </button>
 
           {isUserDropdownOpen && (
-            <div className="user-dropdown">
-              {/* CABEÇALHO DO DROPDOWN */}
-              <div className="dropdown-header">
-                <span className="user-label">Logado como:</span>
-                <span className="username-text">{username}</span>
-              </div>
-
+            <div className="ub-drop">
               {/* STATUS DE INDICAÇÃO */}
-              <div className="dropdown-referral-section">
-                <div className="referral-pill">
-                  <span className="pill-text">Indicações:</span>
-                  <span className="pill-number">{indicacoes}</span>
+              <div className="ub-drop__referral">
+                <div className="ub-drop__pill">
+                  <span className="ub-drop__pill-text">Indicações</span>
+                  <span className="ub-drop__pill-num">{indicacoes}</span>
                 </div>
                 {goalIndicacoes > 0 && (
-                  <div className="mini-progress-container">
-                    <div
-                      className="mini-progress-bar"
-                      style={{ width: `${progressPercentage}%` }}
-                    />
-                  </div>
+                  <>
+                    <div className="ub-drop__track">
+                      <div
+                        className="ub-drop__fill"
+                        style={{ width: `${progressPercentage}%` }}
+                      />
+                    </div>
+                    <span className="ub-drop__goal">
+                      {indicacoes} de {goalIndicacoes} para o prêmio
+                    </span>
+                  </>
                 )}
               </div>
 
-              <div className="dropdown-divider" />
-
-              {/* BOTÃO ATUALIZAR DADOS (NOVO) */}
-              <button className="dropdown-action-item reset-data-btn" onClick={handleResetData}>
-                <AiOutlineEdit className="item-icon" />
-                <span>Atualizar Dados</span>
+              {/* BOTÃO COMPRAR BOTS */}
+              <button className="ub-drop__item" onClick={handleRedirect}>
+                <FiShoppingCart />
+                <span>Comprar bots</span>
               </button>
 
-              <div className="dropdown-divider" />
+              <div className="ub-drop__divider" />
+
+              {/* BOTÃO ATUALIZAR DADOS */}
+              <button className="ub-drop__item" onClick={handleResetData}>
+                <FiEdit3 />
+                <span>Atualizar dados</span>
+              </button>
+
+              <div className="ub-drop__divider" />
 
               {/* BOTÃO SAIR */}
-              <button className="dropdown-action-item logout-btn-new" onClick={handleLogout}>
-                <FaSignOutAlt className="item-icon" />
+              <button
+                className="ub-drop__item ub-drop__item--danger"
+                onClick={handleLogout}
+              >
+                <FiLogOut />
                 <span>Sair da conta</span>
               </button>
             </div>
           )}
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
